@@ -51,7 +51,7 @@ Navigate to the Chrome Web Store and install extension from there (link coming s
    cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run dev-install && xdg-open .
    ```
 
-3) After download finishes and with the `Chrome Extensions` tab open, just drag the `develop` folder into the chrome browser.
+3) After download finishes and with the `Chrome Extensions` tab open, just drag the `build` folder into the chrome browser.
 4) For ease-of-use, I recommend clicking on the cog on the top right, finding the "Gh Plagiarism Check" extension, and clicking the pin to pin it with your favorite extensions.
 
 <img src="./step-2.png" style="width:650px; margin-left: 20px;" />
