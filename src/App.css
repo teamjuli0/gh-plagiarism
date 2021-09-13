@@ -16,3 +16,18 @@ textarea:focus,
 input:focus {
   outline: none;
 }
+
+main {
+  min-height: 561px;
+  width: 300px;
+  background-color: #212121;
+  font-family: NotoSans;
+  color: #e8e8e8;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  background-color: #424242;
+  margin-bottom: 10px;
+}

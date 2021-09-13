@@ -1,11 +1,13 @@
 import { useRef, useState, useEffect } from 'react'
+import helpers from './utils/index.js'
 import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
 
-const specialChars = '/.,:;\'\\`"=*!?#$&+^|~<>(){}[]@ '.split('')
+const { handleKeyUp, checkStr, clearStorage } = helpers
 
 function App() {
+  const inputEl = useRef()
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
   )
@@ -14,70 +16,16 @@ function App() {
     localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
   }, [searchHistory])
 
-  const inputEl = useRef()
-
-  function clearStorage() {
-    localStorage.setItem('ghPlagiarismHistory', '[]')
-    setSearchHistory([])
-  }
-
-  function handleKeyUp(e, str) {
-    if (e.keyCode === 13) {
-      checkStr(str)
-    }
-  }
-
-  function checkStr(str) {
-    let newStr = 'https://github.com/search?q='
-
-    const splitStr = str.current.value.trim().split('')
-
-    if (splitStr.length < 1) {
-      console.log('validation')
-    } else {
-      splitStr.map((char, i) => {
-        if (specialChars.indexOf(char) !== -1) {
-          if (newStr[newStr.length - 1] === '+') {
-            return null
-          } else {
-            return (newStr += '+')
-          }
-        } else {
-          return (newStr += char)
-        }
-      })
-
-      if (newStr[newStr.length - 1] === '+') newStr = newStr.slice(0, -1)
-
-      window.open((newStr += '&type=code'), '_blank')
-
-      setSearchHistory([
-        { url: newStr, date: new Date().toLocaleString() },
-        ...searchHistory.slice(0, 9),
-      ])
-      console.log(searchHistory)
-    }
-  }
+  const updateHistory = (newStr) =>
+    setSearchHistory([
+      { url: newStr, date: new Date().toLocaleString() },
+      ...searchHistory.slice(0, 9),
+    ])
 
   return (
-    <main
-      style={{
-        minHeight: '561px',
-        width: '300px',
-        backgroundColor: '#212121',
-        fontFamily: 'NotoSans',
-        color: '#e8e8e8',
-      }}
-    >
-      <header
-        style={{
-          width: '100%',
-          display: 'flex',
-          backgroundColor: '#424242',
-          marginBottom: '10px',
-        }}
-      >
-        <div
+    <main>
+      <header>
+        <section
           style={{
             display: 'flex',
             flex: '1 1 10%',
@@ -99,13 +47,12 @@ function App() {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            // onClick={() => clearStorage()}
             onClick={() => (inputEl.current.value = '')}
           >
             <i style={{ color: '#cccccc' }} className='fas fa-ban'></i>
           </button>
-        </div>
-        <div
+        </section>
+        <section
           style={{
             display: 'flex',
             flex: '1 1 80%',
@@ -124,12 +71,15 @@ function App() {
             }}
             autoFocus
             placeholder='Enter Your Query Here'
-            onKeyUp={(e) => handleKeyUp(e, inputEl)}
+            onKeyUp={(e) =>
+              handleKeyUp(e, () =>
+                checkStr(inputEl, (str) => updateHistory(str))
+              )
+            }
             ref={inputEl}
           />
-        </div>
-
-        <div
+        </section>
+        <section
           style={{
             display: 'flex',
             flex: '1 1 10%',
@@ -151,11 +101,15 @@ function App() {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onClick={() => checkStr(inputEl)}
+            onClick={() =>
+              checkStr(inputEl, () =>
+                checkStr(inputEl, (str) => updateHistory(str))
+              )
+            }
           >
             <i style={{ color: '#cccccc' }} className='fas fa-search'></i>
           </button>
-        </div>
+        </section>
       </header>
       <section
         style={{
