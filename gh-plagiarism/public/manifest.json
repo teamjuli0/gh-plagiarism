@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+
+  "name": "GH Plagiarism Check",
+  "description": "This extension is a starting point to find plagiarism on github",
+  "version": "0.0.1",
+
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup"
+  },
+  "icons": {
+    "16": "logo-small.png",
+    "48": "logo-small.png",
+    "128": "logo-small.png"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-8yM9AwS4uKYCer7wTki/PQHSVAJ3Y8QLywn1SIsFUvc='; object-src 'self'",
+  "permissions": []
+}
