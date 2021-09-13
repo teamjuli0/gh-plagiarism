@@ -3,7 +3,7 @@ import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
 
-const specialChars = '.,:;\'\\`"=*!?#$&+^|~<>(){}[]@ '.split('')
+const specialChars = '/.,:;\'\\`"=*!?#$&+^|~<>(){}[]@ '.split('')
 
 function App() {
   const [searchHistory, setSearchHistory] = useState(
@@ -53,7 +53,7 @@ function App() {
 
       setSearchHistory([
         { url: newStr, date: new Date().toLocaleString() },
-        ...searchHistory.slice(0, 99),
+        ...searchHistory.slice(0, 9),
       ])
       console.log(searchHistory)
     }
@@ -99,9 +99,10 @@ function App() {
               justifyContent: 'center',
               alignItems: 'center',
             }}
-            onClick={() => clearStorage()}
+            // onClick={() => clearStorage()}
+            onClick={() => (inputEl.current.value = '')}
           >
-            <i style={{ color: '#cccccc' }} class='fas fa-ban'></i>
+            <i style={{ color: '#cccccc' }} className='fas fa-ban'></i>
           </button>
         </div>
         <div
@@ -152,7 +153,7 @@ function App() {
             }}
             onClick={() => checkStr(inputEl)}
           >
-            <i style={{ color: '#cccccc' }} class='fas fa-search'></i>
+            <i style={{ color: '#cccccc' }} className='fas fa-search'></i>
           </button>
         </div>
       </header>
@@ -203,7 +204,7 @@ function App() {
                   }
             }
           >
-            <button
+            <a
               style={{
                 background: 'none',
                 color: 'inherit',
@@ -226,8 +227,8 @@ function App() {
                   margin: 0,
                 }}
               >
-                {search.url.slice(28).slice(0, -10).slice(0, 25)}
-                {search.url.slice(28).slice(0, -10).slice(0, 25).length >= 25
+                {search.url.slice(28).slice(0, -10).slice(0, 23)}
+                {search.url.slice(28).slice(0, -10).slice(0, 23).length >= 23
                   ? '...'
                   : ''}
               </p>
@@ -242,7 +243,7 @@ function App() {
                 Searched on {search.date.split(',')[0]} at{' '}
                 {search.date.split(',')[1]}
               </p>
-            </button>
+            </a>
             <button
               style={{
                 background: 'none',
@@ -265,7 +266,7 @@ function App() {
                 )
               }
             >
-              <i class='fas fa-backspace'></i>
+              <i className='fas fa-backspace'></i>
             </button>
           </div>
         ))}
