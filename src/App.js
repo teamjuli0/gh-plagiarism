@@ -51,7 +51,7 @@ function App() {
         <div className='inputIconDiv'>
           <button
             className='btnReset inputIcon'
-            onClick={() => checkStr(inputEl, () => (str) => updateHistory(str))}
+            onClick={() => checkStr(inputEl, (str) => updateHistory(str))}
           >
             <i style={{ color: '#cccccc' }} className='fas fa-search'></i>
           </button>
