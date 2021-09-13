@@ -224,11 +224,12 @@ function App() {
               <p
                 style={{
                   flex: '1 1 100%',
+                  fontSize: '15px',
                   margin: 0,
                 }}
               >
-                {search.url.slice(28).slice(0, -10).slice(0, 23)}
-                {search.url.slice(28).slice(0, -10).slice(0, 23).length >= 23
+                {search.url.slice(28).slice(0, -10).slice(0, 24)}
+                {search.url.slice(28).slice(0, -10).slice(0, 24).length >= 24
                   ? '...'
                   : ''}
               </p>
