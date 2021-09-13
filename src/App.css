@@ -23,7 +23,12 @@ main {
   background-color: #212121;
   font-family: NotoSans;
   color: #e8e8e8;
+  position: relative;
 }
+
+/* =================== */
+/* | Header Elements | */
+/* =================== */
 
 header {
   width: 100%;
@@ -77,6 +82,10 @@ i {
   padding: 0 10px;
   background-color: #b2b2b2;
 }
+
+/* ======================= */
+/* | Search Row Elements | */
+/* ======================= */
 
 .container {
   display: flex;
