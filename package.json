@@ -17,6 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch": "npm-watch",
+    "update": "git pull && npm run dev-install",
     "dev-install": "npm install && npm run build"
   },
   "watch": {
