@@ -1,41 +1,19 @@
 import logo from './logo.svg'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import './App.css'
 
+const specialChars = '.,:;\'\\`"=*!?#$&+^|~<>(){}[]@ '.split('')
+
 function App() {
+  const [searchHistory, setSearchHistory] = useState(
+    JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
+  )
+
+  useEffect(() => {
+    localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
+  }, [searchHistory])
+
   const inputEl = useRef()
-  const specialChars = [
-    '.',
-    ',',
-    ':',
-    ';',
-    "'",
-    '\\',
-    '`',
-    "'",
-    '"',
-    '=',
-    '*',
-    '!',
-    '?',
-    '#',
-    '$',
-    '&',
-    '+',
-    '^',
-    '|',
-    '~',
-    '<',
-    '>',
-    '(',
-    ')',
-    '{',
-    '}',
-    '[',
-    ']',
-    '@',
-    ' ',
-  ]
 
   function checkStr(str) {
     let newStr = 'https://github.com/search?q='
@@ -54,28 +32,43 @@ function App() {
       }
     })
 
-    if (newStr[newStr.length - 1] === '+') {
-      newStr = newStr.slice(0, -1)
-    }
+    if (newStr[newStr.length - 1] === '+') newStr = newStr.slice(0, -1)
 
-    return newStr + '&type=code'
+    window.open((newStr += '&type=code'), '_blank')
+
+    setSearchHistory([...searchHistory, newStr])
+    console.log(searchHistory)
   }
 
   return (
     <div
       style={{
-        width: '400px',
         height: '600px',
+        width: '300px',
+        backgroundColor: 'gray',
       }}
     >
-      <input ref={inputEl} />
-      <button
-        onClick={() => {
-          window.open(checkStr(inputEl), '_blank')
+      <div
+        style={{
+          padding: '10px',
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
         }}
       >
-        Click Me
-      </button>
+        <input ref={inputEl} />
+        <button onClick={() => checkStr(inputEl)}>Click Me</button>
+      </div>
+      <div>
+        {searchHistory.map((search, i) => (
+          <>
+            <a href={search} target='_blank' rel='noreferrer'>
+              {search.slice(28).slice(0, -10).slice(0, 35)}
+            </a>
+            <br />
+          </>
+        ))}
+      </div>
     </div>
   )
 }
