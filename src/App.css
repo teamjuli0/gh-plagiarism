@@ -31,3 +31,100 @@ header {
   background-color: #424242;
   margin-bottom: 10px;
 }
+
+.inputIconDiv {
+  display: flex;
+  flex: 1 1 10%;
+  padding: 10px 2px;
+  cursor: pointer;
+}
+
+.btnReset {
+  background: none;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+  border: inherit;
+  text-decoration: none;
+  padding: 0;
+}
+
+.inputIcon {
+  cursor: pointer;
+  flex: 1 1 100%;
+  padding: 3px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+i {
+  color: #cccccc;
+}
+
+.inputDiv {
+  display: flex;
+  flex: 1 1 80%;
+  padding: 10px 0;
+}
+
+.inputDiv > input {
+  flex: 1 1 75%;
+  border: 0;
+  height: 30px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 0 10px;
+  background-color: #b2b2b2;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#noQueries {
+  width: 100%;
+  padding: 10px 41px;
+  text-align: center;
+  color: #999999;
+}
+
+.searchDiv {
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #e8e8e8;
+  flex: 1 1 100%;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.searchDiv > a {
+  cursor: pointer;
+  width: 80%;
+  text-align: left;
+}
+
+.searchQuery {
+  flex: 1 1 100%;
+  font-size: 15px;
+  margin: 0;
+}
+
+.searchDate {
+  flex: 1 1 100%;
+  font-size: 12px;
+  color: #7f7f7f;
+  margin: 0;
+}
+
+.deleteQueryBtn {
+  cursor: pointer;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

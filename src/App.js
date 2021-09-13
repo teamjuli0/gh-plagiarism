@@ -4,7 +4,7 @@ import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
 
-const { handleKeyUp, checkStr, clearStorage } = helpers
+const { handleKeyUp, checkStr, clearStorage, bgColorBool, searchStr } = helpers
 
 function App() {
   const inputEl = useRef()
@@ -25,50 +25,20 @@ function App() {
   return (
     <main>
       <header>
-        <section
-          style={{
-            display: 'flex',
-            flex: '1 1 10%',
-            padding: '10px 2px',
-            cursor: 'pointer',
-          }}
-        >
+        <div className='inputIconDiv'>
           <button
-            style={{
-              background: 'none',
-              color: 'inherit',
-              font: 'inherit',
-              cursor: 'pointer',
-              outline: 'inherit',
-              flex: '1 1 100%',
-              border: 0,
-              padding: '3px 0',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+            className='btnReset inputIcon'
+            onClick={() => {
+              inputEl.current.value = ''
+              inputEl.current.focus()
             }}
-            onClick={() => (inputEl.current.value = '')}
           >
-            <i style={{ color: '#cccccc' }} className='fas fa-ban'></i>
+            <i className='fas fa-ban'></i>
           </button>
-        </section>
-        <section
-          style={{
-            display: 'flex',
-            flex: '1 1 80%',
-            padding: '10px 0',
-          }}
-        >
+        </div>
+        <div className='inputDiv'>
           <input
-            style={{
-              flex: '1 1 75%',
-              border: 0,
-              height: '30px',
-              borderRadius: '3px',
-              overflow: 'hidden',
-              padding: '0px 10px',
-              backgroundColor: '#b2b2b2',
-            }}
+            ref={inputEl}
             autoFocus
             placeholder='Enter Your Query Here'
             onKeyUp={(e) =>
@@ -76,143 +46,37 @@ function App() {
                 checkStr(inputEl, (str) => updateHistory(str))
               )
             }
-            ref={inputEl}
           />
-        </section>
-        <section
-          style={{
-            display: 'flex',
-            flex: '1 1 10%',
-            padding: '10px 2px',
-            cursor: 'pointer',
-          }}
-        >
+        </div>
+        <div className='inputIconDiv'>
           <button
-            style={{
-              background: 'none',
-              color: 'inherit',
-              font: 'inherit',
-              cursor: 'pointer',
-              outline: 'inherit',
-              flex: '1 1 100%',
-              border: 0,
-              padding: '3px 0',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onClick={() =>
-              checkStr(inputEl, () =>
-                checkStr(inputEl, (str) => updateHistory(str))
-              )
-            }
+            className='btnReset inputIcon'
+            onClick={() => checkStr(inputEl, () => (str) => updateHistory(str))}
           >
             <i style={{ color: '#cccccc' }} className='fas fa-search'></i>
           </button>
-        </section>
+        </div>
       </header>
-      <section
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-        }}
-      >
+      <section className='container'>
         {searchHistory.length === 0 ? (
-          <h1
-            style={{
-              width: '100%',
-              padding: '10px 41px',
-              textAlign: 'center',
-              color: '#999999',
-            }}
-          >
-            Enter Search Query Above!
-          </h1>
+          <h1 id='noQueries'>Enter Search Query Above!</h1>
         ) : null}
         {searchHistory.slice(0, 10).map((search, i) => (
-          <div
-            style={
-              i % 2 === 0
-                ? {
-                    backgroundColor: '#424242',
-                    minHeight: '40px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'e8e8e8',
-                    flex: '1 1 100%',
-                    flexWrap: 'wrap',
-                    padding: '5px',
-                  }
-                : {
-                    backgroundColor: '#303030',
-                    minHeight: '40px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    color: 'e8e8e8',
-                    flex: '1 1 100%',
-                    flexWrap: 'wrap',
-                    padding: '5px',
-                  }
-            }
-          >
+          <div class='searchDiv' style={bgColorBool(i, '#424242', '#303030')}>
             <a
-              style={{
-                background: 'none',
-                color: 'inherit',
-                border: 0,
-                padding: 0,
-                font: 'inherit',
-                cursor: 'pointer',
-                outline: 'inherit',
-                width: '80%',
-                textDecoration: 'none',
-                textAlign: 'left',
-              }}
+              className='btnReset'
               href={search.url}
               target='_blank'
               rel='noreferrer'
             >
-              <p
-                style={{
-                  flex: '1 1 100%',
-                  fontSize: '15px',
-                  margin: 0,
-                }}
-              >
-                {search.url.slice(28).slice(0, -10).slice(0, 24)}
-                {search.url.slice(28).slice(0, -10).slice(0, 24).length >= 24
-                  ? '...'
-                  : ''}
-              </p>
-              <p
-                style={{
-                  flex: '1 1 100%',
-                  fontSize: '12px',
-                  color: '#7f7f7f',
-                  margin: 0,
-                }}
-              >
+              <p className='searchQuery'>{searchStr(search.url)}</p>
+              <p className='searchDate'>
                 Searched on {search.date.split(',')[0]} at{' '}
                 {search.date.split(',')[1]}
               </p>
             </a>
             <button
-              style={{
-                background: 'none',
-                color: 'inherit',
-                border: 0,
-                padding: 0,
-                font: 'inherit',
-                cursor: 'pointer',
-                outline: 'inherit',
-                width: '10%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
+              className='btnReset deleteQueryBtn'
               onClick={() =>
                 setSearchHistory(
                   searchHistory.filter((stateSearch) =>

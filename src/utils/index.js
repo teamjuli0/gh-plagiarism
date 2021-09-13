@@ -37,6 +37,21 @@ const helpers = {
       cb(newStr)
     }
   },
+  bgColorBool: function (i, colorOne, colorTwo) {
+    let bgColor
+    if (i % 2 === 0) bgColor = { backgroundColor: colorOne }
+    else bgColor = { backgroundColor: colorTwo }
+
+    return bgColor
+  },
+  searchStr: function (str) {
+    let newStr = ''
+
+    newStr += str.slice(28).slice(0, -10).slice(0, 30)
+    if (newStr.length >= 27) newStr = newStr.slice(0, 27) + '...'
+
+    return newStr
+  },
 }
 
 export default helpers
