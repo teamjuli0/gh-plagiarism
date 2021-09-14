@@ -77,7 +77,7 @@ const Footer = (props) => {
         >
           <i class='fas fa-book-open'></i>
         </button>
-        {/* <button
+        <button
           className='btnReset'
           style={{
             flex: '1 1 33.3%',
@@ -85,7 +85,7 @@ const Footer = (props) => {
           }}
         >
           <i class='fas fa-ellipsis-h'></i>
-        </button> */}
+        </button>
       </footer>
       <ScratchPad notesPopup={notesPopup} toggleNotes={toggleNotes} />
       {clearToggle ? <ClearHistory clearStorage={clearStorage} /> : null}
