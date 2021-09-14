@@ -64,25 +64,6 @@ const Footer = (props) => {
         >
           <i class='fas fa-trash-alt'></i>
         </button>
-        {/* <button
-          className='btnReset inputIcon inputIconActive'
-          style={{
-            flex: '1 1 33.3%',
-            height: '100%',
-          }}
-          onClick={() => toggleNotes()}
-        >
-          <i class='fas fa-book-open'></i>
-        </button>
-        <button
-          className='btnReset'
-          style={{
-            flex: '1 1 33.3%',
-            height: '100%',
-          }}
-        >
-          <i class='fas fa-ellipsis-h'></i>
-        </button> */}
       </footer>
       <div className='hidden notes-section' ref={props.notesPopup}>
         <button className='btnReset inputIcon' onClick={() => toggleNotes()}>
