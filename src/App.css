@@ -18,12 +18,26 @@ input:focus {
 }
 
 main {
-  min-height: 561px;
+  height: 561px;
   width: 300px;
   background-color: #212121;
   font-family: NotoSans;
   color: #e8e8e8;
+  position: relative;
+  overflow: hidden;
 }
+
+.inputIconDiv > .inputIcon:active {
+  border-radius: 4px;
+}
+
+.inputIconActive:active {
+  background-color: #343434;
+}
+
+/* =================== */
+/* | Header Elements | */
+/* =================== */
 
 header {
   width: 100%;
@@ -78,6 +92,10 @@ i {
   background-color: #b2b2b2;
 }
 
+/* ======================= */
+/* | Search Row Elements | */
+/* ======================= */
+
 .container {
   display: flex;
   flex-direction: row;
@@ -127,4 +145,40 @@ i {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.notes-section {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #545454;
+  /* border-radius: 5px; */
+  overflow: hidden;
+  opacity: 0;
+  display: flex;
+  align-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-shadow: 0 0 25px #2d2d2d;
+}
+
+.hidden {
+  z-index: -1;
+  opacity: 0;
+}
+
+.hide {
+  transition: 0.4s;
+  z-index: -1;
+  opacity: 0;
+}
+
+.show {
+  transition: 0.4s;
+  z-index: 6;
+  opacity: 1;
 }

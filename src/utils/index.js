@@ -1,8 +1,4 @@
 const helpers = {
-  clearStorage: function (setState) {
-    localStorage.setItem('ghPlagiarismHistory', '[]')
-    setState([])
-  },
   handleKeyUp: function (e, cb) {
     if (e.keyCode === 13) {
       cb()
@@ -32,7 +28,7 @@ const helpers = {
 
       if (newStr[newStr.length - 1] === '+') newStr = newStr.slice(0, -1)
 
-      window.open((newStr += '&type=code'), '_blank')
+      window.open((newStr = newStr.slice(0, 500) + '&type=code'), '_blank')
 
       cb(newStr)
     }
