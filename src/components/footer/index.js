@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import ClearHistory from './clearHistoryModal'
+import ScratchPad from './scratchpad'
 
 const Footer = (props) => {
   const [clearToggle, setClearToggle] = useState(false)
@@ -72,7 +73,7 @@ const Footer = (props) => {
             flex: '1 1 33.3%',
             height: '100%',
           }}
-          onClick={() => toggleNotes()}
+          onClick={toggleNotes}
         >
           <i class='fas fa-book-open'></i>
         </button>
@@ -86,45 +87,7 @@ const Footer = (props) => {
           <i class='fas fa-ellipsis-h'></i>
         </button> */}
       </footer>
-      <div className='hidden notes-section' ref={notesPopup}>
-        <button
-          className='btnReset inputIcon'
-          onClick={() => toggleNotes()}
-          style={{
-            position: 'fixed',
-            top: '10px',
-            right: '15px',
-          }}
-        >
-          <i class='fas fa-times'></i>
-        </button>
-        <h1
-          style={{
-            flex: '0 0 100%',
-            margin: '10px 0',
-            fontSize: '35px',
-            textAlign: 'center',
-          }}
-        >
-          Scratchpad
-        </h1>
-        <textarea
-          style={{
-            border: 0,
-            padding: '10px',
-            flex: '0 0 93%',
-            minHeight: '473px',
-            backgroundColor: '#424242',
-            resize: 'none',
-            color: '#d9d9d9',
-          }}
-          rows='31'
-          placeholder={`Use this scratchpad for quick storage of things like:
-  - notes
-  - links 
-  - etc.`}
-        ></textarea>
-      </div>
+      <ScratchPad notesPopup={notesPopup} toggleNotes={toggleNotes} />
       {clearToggle ? <ClearHistory clearStorage={clearStorage} /> : null}
     </>
   )
