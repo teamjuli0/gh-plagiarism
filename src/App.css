@@ -147,7 +147,7 @@ i {
   align-items: center;
 }
 
-.notes-section {
+.fs-modal-div {
   position: absolute;
   left: 50%;
   -webkit-transform: translateX(-50%);
@@ -156,7 +156,6 @@ i {
   width: 100%;
   height: 100%;
   background-color: #545454;
-  /* border-radius: 5px; */
   overflow: hidden;
   opacity: 0;
   display: flex;

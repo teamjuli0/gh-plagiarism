@@ -1,43 +1,27 @@
 import { useState, useRef } from 'react'
 import ClearHistory from './clearHistoryModal'
 import ScratchPad from './scratchpad'
+import SettingsPane from './settings'
+
+import helpers from '../../utils'
+const { toggleModel } = helpers
 
 const Footer = (props) => {
-  const [clearToggle, setClearToggle] = useState(false)
+  const [clearHistory, setClearHistory] = useState(false)
+
+  // const [showSettings, setShowSettings] = useState(false)
+
   const notesPopup = useRef()
+  const settingsPopup = useRef()
 
   const clearStorage = (e) => {
-    setClearToggle(true)
+    setClearHistory(true)
     if (e.target.innerHTML === `I'm Sure`) {
       localStorage.setItem('ghPlagiarismHistory', '[]')
       props.setSearchHistory([])
-      setClearToggle(false)
+      setClearHistory(false)
     } else if (e.target.innerHTML === `Cancel`) {
-      setClearToggle(false)
-    }
-  }
-
-  const toggleNotes = () => {
-    const notesClasses = notesPopup.current.classList
-
-    switch (true) {
-      case notesClasses.contains('hidden'):
-        notesClasses.remove('hidden')
-        notesClasses.add('show')
-        props.setNotesActive(true)
-        break
-      case notesClasses.contains('show'):
-        notesClasses.remove('show')
-        notesClasses.add('hide')
-        props.setNotesActive(false)
-        break
-      case notesClasses.contains('hide'):
-        notesClasses.remove('hide')
-        notesClasses.add('show')
-        props.setNotesActive(true)
-        break
-      default:
-        return
+      setClearHistory(false)
     }
   }
 
@@ -73,22 +57,31 @@ const Footer = (props) => {
             flex: '1 1 33.3%',
             height: '100%',
           }}
-          onClick={toggleNotes}
+          onClick={() => toggleModel(notesPopup)}
         >
           <i class='fas fa-book-open'></i>
         </button>
         <button
-          className='btnReset'
+          className='btnReset inputIcon inputIconActive'
           style={{
             flex: '1 1 33.3%',
             height: '100%',
           }}
+          onClick={() => toggleModel(settingsPopup)}
         >
           <i class='fas fa-ellipsis-h'></i>
         </button>
       </footer>
-      <ScratchPad notesPopup={notesPopup} toggleNotes={toggleNotes} />
-      {clearToggle ? <ClearHistory clearStorage={clearStorage} /> : null}
+      <ScratchPad
+        notesPopup={notesPopup}
+        toggleModel={() => toggleModel(notesPopup)}
+      />
+      <SettingsPane
+        settingsPopup={settingsPopup}
+        toggleModel={() => toggleModel(settingsPopup)}
+      />
+
+      {clearHistory ? <ClearHistory clearStorage={clearStorage} /> : null}
     </>
   )
 }

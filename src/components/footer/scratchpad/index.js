@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 const ScratchPad = (props) => {
   const notesTxtArea = useRef()
@@ -9,10 +9,10 @@ const ScratchPad = (props) => {
   }
 
   return (
-    <div className='hidden notes-section' ref={props.notesPopup}>
+    <div className='hidden fs-modal-div' ref={props.notesPopup}>
       <button
         className='btnReset inputIcon'
-        onClick={props.toggleNotes}
+        onClick={() => props.toggleModel(props.notesPopup)}
         style={{
           position: 'fixed',
           top: '10px',
