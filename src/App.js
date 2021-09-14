@@ -1,22 +1,56 @@
 import { useRef, useState, useEffect } from 'react'
 
 // import all css files
-import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
+import './App.css'
 
 // import and deconstructed helper object
 import helpers from './utils/index.js'
 const { handleKeyUp, checkStr, bgColorBool, searchStr } = helpers
 
 function App() {
-  // ref for input element
+  // element refs
   const inputEl = useRef()
+  const notesPopup = useRef()
+  const newNoteInput = useRef()
 
   // setting state for searchHistory to equal the saved array on local storage or an empty array if the former doesn't exist
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
   )
+
+  const [notesActive, setNotesActive] = useState(false)
+
+  const handleClick = (e) => {
+    let elClasses = [...e.target.classList]
+    // let childElClasses = [...e.target.childNodes[0].classList]
+    let parentElClasses = [...e.target.parentNode.classList]
+
+    // console.log(childElClasses)
+
+    const notesClasses = notesPopup.current.classList
+    if (
+      elClasses[0] === 'note-element' ||
+      parentElClasses[0] === 'note-element'
+    ) {
+      setNotesActive(true)
+      return
+    } else {
+      notesClasses.remove('show')
+      notesClasses.add('hide')
+      setNotesActive(false)
+    }
+  }
+
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener('mouseup', handleClick)
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener('mouseup', handleClick)
+    }
+  }, [])
 
   // whenever the search history state updates, we also want to update the local storage to match
   useEffect(() => {
@@ -27,7 +61,7 @@ function App() {
   const updateHistory = (newStr) =>
     setSearchHistory([
       { url: newStr, date: new Date().toLocaleString() },
-      ...searchHistory.slice(0, 9),
+      ...searchHistory.slice(0, 8),
     ])
 
   const clearStorage = () => {
@@ -37,6 +71,19 @@ function App() {
 
   return (
     <main>
+      {notesActive ? (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 5,
+            height: '561px',
+            width: '300px',
+            backgroundColor: '#00000090',
+          }}
+        />
+      ) : null}
       <header>
         <div className='inputIconDiv'>
           <button
@@ -83,7 +130,7 @@ function App() {
           ) : (
             // if search history has one or more items, only grab the first 10 items and display one row per search
             <>
-              {searchHistory.slice(0, 10).map((search, i) => (
+              {searchHistory.map((search, i) => (
                 <>
                   <div
                     class='searchDiv'
@@ -128,7 +175,7 @@ function App() {
           )
         }
       </section>
-      <div
+      <footer
         style={{
           backgroundColor: '#424242',
           width: '100%',
@@ -153,10 +200,33 @@ function App() {
           <i class='fas fa-trash-alt'></i>
         </button>
         <button
-          className='btnReset'
+          className='btnReset inputIcon'
           style={{
             flex: '1 1 33.3%',
             height: '100%',
+          }}
+          onClick={() => {
+            const notesClasses = notesPopup.current.classList
+
+            switch (true) {
+              case notesClasses.contains('hidden'):
+                notesClasses.remove('hidden')
+                notesClasses.add('show')
+                setNotesActive(true)
+                break
+              case notesClasses.contains('show'):
+                notesClasses.remove('show')
+                notesClasses.add('hide')
+                setNotesActive(false)
+                break
+              case notesClasses.contains('hide'):
+                notesClasses.remove('hide')
+                notesClasses.add('show')
+                setNotesActive(true)
+                break
+              default:
+                return
+            }
           }}
         >
           <i class='fas fa-book-open'></i>
@@ -170,6 +240,71 @@ function App() {
         >
           <i class='fas fa-ellipsis-h'></i>
         </button>
+      </footer>
+      <div className='hidden notes-section' ref={notesPopup}>
+        <div
+          className='note-element'
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '15px 0 5px 0',
+          }}
+        >
+          <input
+            ref={newNoteInput}
+            maxLength='40'
+            style={{
+              flex: '0 0 75%',
+              border: 0,
+              padding: '5px',
+              borderRadius: '3px 0 0 3px',
+            }}
+            placeholder='Ask John about tests'
+          />
+          <button
+            className='btnReset inputIcon'
+            style={{
+              flex: '0 0 10%',
+              borderRadius: '0 3px 3px 0',
+              backgroundColor: 'white',
+              padding: '5px',
+              borderLeft: 'solid 1px #eaeaea',
+            }}
+            onClick={() =>
+              // if search button is pressed, search input value and update state
+              checkStr(inputEl, (str) => updateHistory(str))
+            }
+          >
+            <i
+              style={{ color: '#cccccc', height: '15px' }}
+              className='fas fa-search'
+            ></i>
+          </button>
+        </div>
+        {/* <input
+          className='note-element'
+          style={{
+            borderBottom: '1.5px solid #424242',
+            padding: '5px 15px',
+            fontSize: '12px',
+            margin: 0,
+          }}
+          value='Hello World'
+        /> */}
+        <h1
+          className='note-element'
+          style={{
+            borderBottom: '1.5px solid #424242',
+            padding: '5px 15px',
+            fontSize: '12px',
+            margin: 0,
+          }}
+        >
+          Notes Go Here!
+        </h1>
       </div>
     </main>
   )
