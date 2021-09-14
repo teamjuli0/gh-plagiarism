@@ -22,36 +22,6 @@ function App() {
 
   const [notesActive, setNotesActive] = useState(false)
 
-  const handleClick = (e) => {
-    let elClasses = [...e.target.classList]
-    // let childElClasses = [...e.target.childNodes[0].classList]
-    let parentElClasses = [...e.target.parentNode.classList]
-
-    // console.log(childElClasses)
-
-    const notesClasses = notesPopup.current.classList
-    if (
-      elClasses[0] === 'note-element' ||
-      parentElClasses[0] === 'note-element'
-    ) {
-      setNotesActive(true)
-      return
-    } else {
-      notesClasses.remove('show')
-      notesClasses.add('hide')
-      setNotesActive(false)
-    }
-  }
-
-  useEffect(() => {
-    // add when mounted
-    document.addEventListener('mouseup', handleClick)
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener('mouseup', handleClick)
-    }
-  }, [])
-
   // whenever the search history state updates, we also want to update the local storage to match
   useEffect(() => {
     localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
@@ -71,7 +41,7 @@ function App() {
 
   return (
     <main>
-      {notesActive ? (
+      {/* {notesActive ? (
         <div
           style={{
             position: 'fixed',
@@ -80,14 +50,14 @@ function App() {
             zIndex: 5,
             height: '561px',
             width: '300px',
-            backgroundColor: '#00000090',
+            backgroundColor: '#00000070',
           }}
         />
-      ) : null}
+      ) : null} */}
       <header>
         <div className='inputIconDiv'>
           <button
-            className='btnReset inputIcon'
+            className='btnReset inputIcon inputIconActive'
             onClick={() => {
               // whenever stop icon is pushed, reset ando focus on the input
               inputEl.current.value = ''
@@ -112,7 +82,7 @@ function App() {
         </div>
         <div className='inputIconDiv'>
           <button
-            className='btnReset inputIcon'
+            className='btnReset inputIcon inputIconActive'
             onClick={() =>
               // if search button is pressed, search input value and update state
               checkStr(inputEl, (str) => updateHistory(str))
@@ -190,7 +160,7 @@ function App() {
         }}
       >
         <button
-          className='btnReset inputIcon'
+          className='btnReset inputIcon inputIconActive'
           style={{
             flex: '1 1 33.3%',
             height: '100%',
@@ -200,7 +170,7 @@ function App() {
           <i class='fas fa-trash-alt'></i>
         </button>
         <button
-          className='btnReset inputIcon'
+          className='btnReset inputIcon inputIconActive'
           style={{
             flex: '1 1 33.3%',
             height: '100%',
@@ -242,69 +212,34 @@ function App() {
         </button>
       </footer>
       <div className='hidden notes-section' ref={notesPopup}>
-        <div
-          className='note-element'
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: '15px 0 5px 0',
-          }}
-        >
-          <input
-            ref={newNoteInput}
-            maxLength='40'
-            style={{
-              flex: '0 0 75%',
-              border: 0,
-              padding: '5px',
-              borderRadius: '3px 0 0 3px',
-            }}
-            placeholder='Ask John about tests'
-          />
-          <button
-            className='btnReset inputIcon'
-            style={{
-              flex: '0 0 10%',
-              borderRadius: '0 3px 3px 0',
-              backgroundColor: 'white',
-              padding: '5px',
-              borderLeft: 'solid 1px #eaeaea',
-            }}
-            onClick={() =>
-              // if search button is pressed, search input value and update state
-              checkStr(inputEl, (str) => updateHistory(str))
+        <button
+          className='btnReset inputIcon'
+          onClick={() => {
+            const notesClasses = notesPopup.current.classList
+
+            switch (true) {
+              case notesClasses.contains('hidden'):
+                notesClasses.remove('hidden')
+                notesClasses.add('show')
+                setNotesActive(true)
+                break
+              case notesClasses.contains('show'):
+                notesClasses.remove('show')
+                notesClasses.add('hide')
+                setNotesActive(false)
+                break
+              case notesClasses.contains('hide'):
+                notesClasses.remove('hide')
+                notesClasses.add('show')
+                setNotesActive(true)
+                break
+              default:
+                return
             }
-          >
-            <i
-              style={{ color: '#cccccc', height: '15px' }}
-              className='fas fa-search'
-            ></i>
-          </button>
-        </div>
-        {/* <input
-          className='note-element'
-          style={{
-            borderBottom: '1.5px solid #424242',
-            padding: '5px 15px',
-            fontSize: '12px',
-            margin: 0,
-          }}
-          value='Hello World'
-        /> */}
-        <h1
-          className='note-element'
-          style={{
-            borderBottom: '1.5px solid #424242',
-            padding: '5px 15px',
-            fontSize: '12px',
-            margin: 0,
           }}
         >
-          Notes Go Here!
-        </h1>
+          <i class='fas fa-times'></i>
+        </button>
       </div>
     </main>
   )

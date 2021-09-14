@@ -31,7 +31,7 @@ main {
   border-radius: 4px;
 }
 
-.inputIcon:active {
+.inputIconActive:active {
   background-color: #343434;
 }
 
@@ -152,10 +152,11 @@ i {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  top: 15%;
-  width: 90%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
   background-color: #545454;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   overflow: hidden;
   opacity: 0;
   display: flex;
@@ -178,18 +179,4 @@ i {
   transition: 0.5s;
   z-index: 6;
   opacity: 1;
-}
-
-.note-element {
-  border: none;
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  font-family: inherit;
-  background-image: none;
-  background-color: transparent;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  flex: 1 1 100%;
 }
