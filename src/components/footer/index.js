@@ -65,7 +65,7 @@ const Footer = (props) => {
         >
           <i class='fas fa-trash-alt'></i>
         </button>
-        {/* <button
+        <button
           className='btnReset inputIcon inputIconActive'
           style={{
             flex: '1 1 33.3%',
@@ -75,7 +75,7 @@ const Footer = (props) => {
         >
           <i class='fas fa-book-open'></i>
         </button>
-        <button
+        {/* <button
           className='btnReset'
           style={{
             flex: '1 1 33.3%',
