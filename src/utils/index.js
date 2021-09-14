@@ -5,7 +5,7 @@ const helpers = {
     }
   },
   checkStr: function (str, cb) {
-    const specialChars = '/.,:;\'\\`"=*!?#$&+^|~<>(){}[]@ '.split('')
+    const specialChars = '/.,:;\'\\`"=*!?#$&+^|~<>(){}[]@% '.split('')
 
     let newStr = 'https://github.com/search?q='
 
