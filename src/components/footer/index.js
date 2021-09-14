@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import ClearHistory from './clearHistoryModal'
+import ScratchPad from './scratchpad'
 
 const Footer = (props) => {
   const [clearToggle, setClearToggle] = useState(false)
+  const notesPopup = useRef()
 
   const clearStorage = (e) => {
     setClearToggle(true)
@@ -16,7 +18,7 @@ const Footer = (props) => {
   }
 
   const toggleNotes = () => {
-    const notesClasses = props.notesPopup.current.classList
+    const notesClasses = notesPopup.current.classList
 
     switch (true) {
       case notesClasses.contains('hidden'):
@@ -65,12 +67,27 @@ const Footer = (props) => {
         >
           <i class='fas fa-trash-alt'></i>
         </button>
-      </footer>
-      <div className='hidden notes-section' ref={props.notesPopup}>
-        <button className='btnReset inputIcon' onClick={() => toggleNotes()}>
-          <i class='fas fa-times'></i>
+        <button
+          className='btnReset inputIcon inputIconActive'
+          style={{
+            flex: '1 1 33.3%',
+            height: '100%',
+          }}
+          onClick={toggleNotes}
+        >
+          <i class='fas fa-book-open'></i>
         </button>
-      </div>
+        {/* <button
+          className='btnReset'
+          style={{
+            flex: '1 1 33.3%',
+            height: '100%',
+          }}
+        >
+          <i class='fas fa-ellipsis-h'></i>
+        </button> */}
+      </footer>
+      <ScratchPad notesPopup={notesPopup} toggleNotes={toggleNotes} />
       {clearToggle ? <ClearHistory clearStorage={clearStorage} /> : null}
     </>
   )
