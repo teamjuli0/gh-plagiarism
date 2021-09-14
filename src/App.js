@@ -34,6 +34,7 @@ function App() {
         notesActive={notesActive}
         setNotesActive={setNotesActive}
         notesPopup={notesPopup}
+        setSearchHistory={setSearchHistory}
       />
     </main>
   )
