@@ -1,18 +1,17 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 const ScratchPad = (props) => {
   const notesTxtArea = useRef()
   let scratchpad = localStorage.getItem('gh-scratchpad') || ''
-
   const saveNotes = () => {
     localStorage.setItem('gh-scratchpad', notesTxtArea.current.value)
   }
 
   return (
-    <div className='hidden notes-section' ref={props.notesPopup}>
+    <div className='hidden fs-modal-div' ref={props.notesPopup}>
       <button
         className='btnReset inputIcon'
-        onClick={props.toggleNotes}
+        onClick={() => props.toggleModel(props.notesPopup)}
         style={{
           position: 'fixed',
           top: '10px',

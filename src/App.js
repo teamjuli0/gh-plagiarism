@@ -11,8 +11,6 @@ function App() {
     JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
   )
 
-  const [notesActive, setNotesActive] = useState(false)
-
   useEffect(() => {
     localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
   }, [searchHistory])
@@ -28,8 +26,7 @@ function App() {
         setSearchHistory={setSearchHistory}
       />
       <Footer
-        notesActive={notesActive}
-        setNotesActive={setNotesActive}
+        searchHistory={searchHistory}
         setSearchHistory={setSearchHistory}
       />
     </main>
