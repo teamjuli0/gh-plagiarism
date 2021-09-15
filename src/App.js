@@ -25,7 +25,10 @@ function App() {
         searchHistory={searchHistory}
         setSearchHistory={setSearchHistory}
       />
-      <Footer setSearchHistory={setSearchHistory} />
+      <Footer
+        searchHistory={searchHistory}
+        setSearchHistory={setSearchHistory}
+      />
     </main>
   )
 }

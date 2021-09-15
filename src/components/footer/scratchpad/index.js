@@ -3,7 +3,6 @@ import { useRef } from 'react'
 const ScratchPad = (props) => {
   const notesTxtArea = useRef()
   let scratchpad = localStorage.getItem('gh-scratchpad') || ''
-
   const saveNotes = () => {
     localStorage.setItem('gh-scratchpad', notesTxtArea.current.value)
   }

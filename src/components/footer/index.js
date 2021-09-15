@@ -78,6 +78,8 @@ const Footer = (props) => {
       />
       <SettingsPane
         settingsPopup={settingsPopup}
+        searchHistory={props.searchHistory}
+        setSearchHistory={props.setSearchHistory}
         toggleModel={() => toggleModel(settingsPopup)}
       />
 
