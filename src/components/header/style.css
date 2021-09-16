@@ -1,0 +1,52 @@
+.inputIconDiv > .inputIcon:active {
+  border-radius: 4px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  background-color: #424242;
+  margin-bottom: 10px;
+}
+
+.inputIconDiv {
+  display: flex;
+  flex: 1 1 10%;
+  padding: 10px 2px;
+  cursor: pointer;
+}
+
+.inputDiv {
+  display: flex;
+  flex: 1 1 100%;
+  padding: 10px 15px;
+}
+
+.inputDiv > input {
+  flex: 1 1 70%;
+  border: 0;
+  height: 30px;
+  border-radius: 3px 0 0 3px;
+  overflow: hidden;
+  padding: 0 10px;
+  background-color: #b2b2b2;
+}
+
+#clear-search {
+  flex: 0 0 12%;
+  background-color: #b2b2b2;
+}
+
+#submit-search {
+  background-color: #5e5e5e;
+  flex: 0 0 13%;
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+#submit-search > i {
+  color: #e8e8e8;
+}
+#clear-search > i {
+  color: #4d4d4d;
+}

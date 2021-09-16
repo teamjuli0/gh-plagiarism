@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import './style.css'
 
 const ScratchPad = (props) => {
   const notesTxtArea = useRef()
@@ -8,40 +9,17 @@ const ScratchPad = (props) => {
   }
 
   return (
-    <div className='hidden fs-modal-div' ref={props.notesPopup}>
+    <div className='hidden fs-modal-div scratchpad' ref={props.notesPopup}>
       <button
         className='btnReset inputIcon'
         onClick={() => props.toggleModel(props.notesPopup)}
-        style={{
-          position: 'fixed',
-          top: '10px',
-          right: '15px',
-        }}
       >
         <i class='fas fa-times'></i>
       </button>
-      <h1
-        style={{
-          flex: '0 0 100%',
-          margin: '10px 0',
-          fontSize: '35px',
-          textAlign: 'center',
-        }}
-      >
-        Scratchpad
-      </h1>
+      <h1>Scratchpad</h1>
       <textarea
         onKeyUp={saveNotes}
         ref={notesTxtArea}
-        style={{
-          border: 0,
-          padding: '10px',
-          flex: '0 0 93%',
-          minHeight: '473px',
-          backgroundColor: '#424242',
-          resize: 'none',
-          color: '#d9d9d9',
-        }}
         rows='31'
         placeholder={`Use this scratchpad for quick storage of things like:
     - notes

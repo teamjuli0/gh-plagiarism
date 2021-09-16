@@ -1,0 +1,22 @@
+.scratchpad > button {
+  position: fixed;
+  top: 10px;
+  right: 15px;
+}
+
+.scratchpad > h1 {
+  flex: 0 0 100%;
+  margin: 10px 0;
+  font-size: 35px;
+  text-align: center;
+}
+
+.scratchpad > textarea {
+  border: 0;
+  padding: 10px;
+  flex: 0 0 93%;
+  min-height: 473px;
+  background-color: #424242;
+  resize: none;
+  color: #d9d9d9;
+}

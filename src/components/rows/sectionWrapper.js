@@ -1,7 +1,7 @@
 import Heading from './heading'
 
 const SectionWrapper = (props) => (
-  <div style={{ display: 'flex', flex: '0 0 100%', flexWrap: 'wrap' }}>
+  <div className='section-wrapper'>
     <Heading title={props.title} />
     {props.children}
   </div>

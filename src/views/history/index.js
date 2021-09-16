@@ -1,4 +1,6 @@
+import './style.css'
 import helpers from '../../utils'
+
 const { bgColorBool, searchStr } = helpers
 
 const History = (props) => {
@@ -17,7 +19,16 @@ const History = (props) => {
                   class='searchDiv'
                   style={
                     // alternate between background colors
-                    bgColorBool(i, '#424242', '#303030')
+                    bgColorBool(
+                      i,
+                      '#424242',
+                      '#303030',
+                      i === props.searchHistory.length - 1
+                        ? {
+                            marginBottom: '60px',
+                          }
+                        : null
+                    )
                   }
                 >
                   <a
@@ -47,9 +58,6 @@ const History = (props) => {
                     <i className='fas fa-backspace'></i>
                   </button>
                 </div>
-                {i === props.searchHistory.length - 1 ? (
-                  <div style={{ height: '60px' }} />
-                ) : null}
               </>
             ))}
           </>

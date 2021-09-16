@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react'
-import ClearHistory from './clearHistoryModal'
-import ScratchPad from './scratchpad'
-import SettingsPane from './settings'
-
+import { ResetModal } from '../'
+import ScratchPad from '../../views/scratchpad'
+import SettingsPane from '../../views/settings'
 import helpers from '../../utils'
+import './style.css'
+
 const { toggleModel } = helpers
 
 const Footer = (props) => {
@@ -27,46 +28,21 @@ const Footer = (props) => {
 
   return (
     <>
-      <footer
-        style={{
-          backgroundColor: '#424242',
-          width: '100%',
-          height: '50px',
-          position: 'absolute',
-          bottom: '0',
-          left: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'row',
-        }}
-      >
+      <footer>
         <button
           className='btnReset inputIcon inputIconActive'
-          style={{
-            flex: '1 1 33.3%',
-            height: '100%',
-          }}
           onClick={(e) => clearStorage(e)}
         >
           <i class='fas fa-trash-alt'></i>
         </button>
         <button
           className='btnReset inputIcon inputIconActive'
-          style={{
-            flex: '1 1 33.3%',
-            height: '100%',
-          }}
           onClick={() => toggleModel(notesPopup)}
         >
           <i class='fas fa-book-open'></i>
         </button>
         <button
           className='btnReset inputIcon inputIconActive'
-          style={{
-            flex: '1 1 33.3%',
-            height: '100%',
-          }}
           onClick={() => toggleModel(settingsPopup)}
         >
           <i class='fas fa-ellipsis-h'></i>
@@ -83,7 +59,12 @@ const Footer = (props) => {
         toggleModel={() => toggleModel(settingsPopup)}
       />
 
-      {clearHistory ? <ClearHistory clearStorage={clearStorage} /> : null}
+      {clearHistory ? (
+        <ResetModal
+          text={`Are you sure you'd like to reset your search history and notes?`}
+          handleClick={clearStorage}
+        />
+      ) : null}
     </>
   )
 }

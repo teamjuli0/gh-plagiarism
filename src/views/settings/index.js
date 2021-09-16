@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import SectionWrapper from './rows/sectionWrapper'
-import helpers from '../../../utils'
-import Row from './rows/row'
-import ResetModal from './resetStorageModal/resetStorage'
+import helpers from '../../utils'
+import { Row, SectionWrapper } from '../../components/rows/'
+import { ResetModal } from '../../components/'
+import './style.css'
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
@@ -21,30 +21,18 @@ const SettingsPane = (props) => {
   }
 
   return (
-    <div className='hidden fs-modal-div' ref={props.settingsPopup}>
+    <section
+      className='hidden fs-modal-div settings-pane'
+      ref={props.settingsPopup}
+    >
       <button
         className='btnReset inputIcon'
         onClick={() => props.toggleModel(props.settingsPopup)}
-        style={{
-          position: 'fixed',
-          top: '10px',
-          right: '15px',
-        }}
       >
         <i class='fas fa-times'></i>
       </button>
 
-      <h1
-        style={{
-          flex: '0 0 100%',
-          margin: '10px 0',
-          fontSize: '35px',
-          textAlign: 'left',
-          paddingLeft: '10px',
-        }}
-      >
-        Settings
-      </h1>
+      <h1>Settings</h1>
       <SectionWrapper title='Export Data'>
         <Row
           title='Export Search History as JSON File'
@@ -99,7 +87,7 @@ const SettingsPane = (props) => {
         {resetStorage ? (
           <ResetModal
             text={`Are you sure you'd like to reset your search history and notes?`}
-            resetStorage={clearStorage}
+            handleClick={clearStorage}
           />
         ) : null}
       </SectionWrapper>
@@ -122,7 +110,7 @@ const SettingsPane = (props) => {
           }
         />
       </SectionWrapper>
-    </div>
+    </section>
   )
 }
 

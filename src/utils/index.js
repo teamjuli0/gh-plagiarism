@@ -33,10 +33,10 @@ const helpers = {
       cb(newStr)
     }
   },
-  bgColorBool: function (i, colorOne, colorTwo) {
+  bgColorBool: function (i, colorOne, colorTwo, styles) {
     let bgColor
-    if (i % 2 === 0) bgColor = { backgroundColor: colorOne }
-    else bgColor = { backgroundColor: colorTwo }
+    if (i % 2 === 0) bgColor = { ...styles, backgroundColor: colorOne }
+    else bgColor = { ...styles, backgroundColor: colorTwo }
 
     return bgColor
   },
