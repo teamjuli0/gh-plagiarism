@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
-import ClearHistory from './clearHistoryModal'
-import ScratchPad from './scratchpad'
-import SettingsPane from './settings'
+import ClearHistory from '../clearHistoryModal'
+import ScratchPad from '../../views/scratchpad'
+import SettingsPane from '../../views/settings'
 
 import helpers from '../../utils'
 const { toggleModel } = helpers

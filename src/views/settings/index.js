@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import SectionWrapper from './rows/sectionWrapper'
-import helpers from '../../../utils'
-import Row from './rows/row'
-import ResetModal from './resetStorageModal/resetStorage'
+import helpers from '../../utils'
+import { Row, SectionWrapper } from '../../components/rows/'
+import ResetModal from '../../components/resetStorageModal'
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {

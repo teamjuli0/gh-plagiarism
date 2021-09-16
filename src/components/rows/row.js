@@ -1,4 +1,4 @@
-import helpers from '../../../../utils'
+import helpers from '../../utils'
 const { jsonFile } = helpers
 
 const Row = (props) => {

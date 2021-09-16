@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
-import { Footer, Header, History } from './components'
+import { Footer, Header } from './components'
+import { History } from './views'
 
 // import all css files
 import './fonts/Noto_Sans/index.css'
