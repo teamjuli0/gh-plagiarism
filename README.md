@@ -61,33 +61,31 @@ Navigate to the Chrome Web Store and install extension from there (link coming s
 ## Example Query In
 
 ```javascript
-const [searchHistory, setSearchHistory] = useState(
-  JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
-)
-
-useEffect(() => {
-  localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
-}, [searchHistory])
-
-const inputEl = useRef()
-
-function clearStorage() {
-  localStorage.setItem('ghPlagiarismHistory', '[]')
-  setSearchHistory([])
-}
-
-function handleKeyUp(e, str) {
-  if (e.keyCode === 13) {
-    checkStr(str)
-  }
+function asyncCopyTo(from, to) {
+  return asyncMkDirP(path.dirname(to)).then(
+    () =>
+      new Promise((resolve, reject) => {
+        ncp(from, to, (error) => {
+          if (error) {
+            // Wrap to have a useful stack trace.
+            reject(new Error(error))
+          } else {
+            // Wait for copied files to exist; ncp() sometimes completes prematurely.
+            // For more detail, see github.com/facebook/react/issues/22323
+            // Also github.com/AvianFlu/ncp/issues/127
+            setTimeout(resolve, 10)
+          }
+        })
+      })
+  )
 }
 ```
 
 ## Example URL Out
 
-Gh Plagiarism Check: [1 Result(s)](https://github.com/search?q=const+searchHistory+setSearchHistory+useState+JSON+parse+localStorage+getItem+ghPlagiarismHistory+useEffect+localStorage+setItem+ghPlagiarismHistory+JSON+stringify+searchHistory+searchHistory+const+inputEl+useRef+function+clearStorage+localStorage+setItem+ghPlagiarismHistory+setSearchHistory+function+handleKeyUp+e+str+if+e+keyCode+13+checkStr+str&type=code)
+Gh Plagiarism Check: [1 Result (as of writing)](https://github.com/search?q=function+asyncCopyTo+from+to+return+asyncMkDirP+path+dirname+to+then+new+Promise+resolve+reject+ncp+from+to+error+if+error+Wrap+to+have+a+useful+stack+trace+reject+new+Error+error+else+Wait+for+copied+files+to+exist+ncp+sometimes+completes+prematurely+For+more+detail+see+github+com+facebook+react+issues+22323+Also+github+com+AvianFlu+ncp+issues+127+setTimeout+resolve+10&type=code)
 
-Github Search: [0 Result(s)](https://github.com/search?q=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dconst%2BsearchHistory%2BsetSearchHistory%2BuseState%2BJSON%2Bparse%2BlocalStorage%2BgetItem%2BghPlagiarismHistory%2BuseEffect%2BlocalStorage%2BsetItem%2BghPlagiarismHistory%2BJSON%2Bstringify%2BsearchHistory%2BsearchHistory%2Bconst%2BinputEl%2BuseRef%2Bfunction%2BclearStorage%2BlocalStorage%2BsetItem%2BghPlagiarismHistory%2BsetSearchHistory%2Bfunction%2BhandleKeyUp%2Be%2Bstr%2Bif%2Be%2BkeyCode%2B13%2BcheckStr%2Bstr%26type%3Dcode&type=code)
+Github Search: [0 Results (as of writing)](https://github.com/search?q=function+asyncCopyTo%28from%2C+to%29+%7B+++return+asyncMkDirP%28path.dirname%28to%29%29.then%28+++++%28%29+%3D%3E+++++++new+Promise%28%28resolve%2C+reject%29+%3D%3E+%7B+++++++++ncp%28from%2C+to%2C+error+%3D%3E+%7B+++++++++++if+%28error%29+%7B+++++++++++++%2F%2F+Wrap+to+have+a+useful+stack+trace.+++++++++++++reject%28new+Error%28error%29%29%3B+++++++++++%7D+else+%7B+++++++++++++%2F%2F+Wait+for+copied+files+to+exist%3B+ncp%28%29+sometimes+completes+prematurely.+++++++++++++%2F%2F+For+more+detail%2C+see+github.com%2Ffacebook%2Freact%2Fissues%2F22323+++++++++++++%2F%2F+Also+github.com%2FAvianFlu%2Fncp%2Fissues%2F127+++++++++++++setTimeout%28resolve%2C+10%29%3B+++++++++++%7D+++++++++%7D%29%3B+++++++%7D%29+++%29%3B+%7D&type=code)
 
 ## License
 
