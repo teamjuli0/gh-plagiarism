@@ -1,75 +1,24 @@
+import './style.css'
+
 const ResetModal = (props) => {
   return (
-    <>
-      <div
-        style={{
-          position: 'absolute',
-          top: '15%',
-          padding: '10px 0',
-          margin: '0 10px',
-          width: '280px',
-          minHeight: '120px',
-          borderRadius: '3px',
-          backgroundColor: '#545454',
-          boxShadow: '0 0 25px #1b1b1b',
-        }}
-      >
-        <h1
-          style={{
-            margin: '0 0 10px 0',
-            padding: '0 10px',
-            fontSize: '20px',
-            textAlign: 'center',
-          }}
+    <section className='reset-modal-div'>
+      <h1>{props.text}</h1>
+      <div>
+        <button
+          onClick={(e) => props.handleClick(e)}
+          className='btn-reset inputIcon'
         >
-          {props.text}
-        </h1>
-        <div
-          style={{
-            margin: 'auto',
-            width: '65%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          I'm Sure
+        </button>
+        <button
+          onClick={(e) => props.handleClick(e)}
+          className='btn-reset inputIcon'
         >
-          <button
-            onClick={(e) => props.handleClick(e)}
-            className='btn-reset inputIcon'
-            style={{
-              margin: '0 5px',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              fontFamily: 'Noto Sans',
-              backgroundColor: '#373737',
-              border: 0,
-              color: '#e8e8e8',
-              padding: '5px 0',
-              borderRadius: '3px',
-            }}
-          >
-            I'm Sure
-          </button>
-          <button
-            onClick={(e) => props.handleClick(e)}
-            className='btn-reset inputIcon'
-            style={{
-              margin: '0 5px',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              fontFamily: 'Noto Sans',
-              backgroundColor: '#373737',
-              border: 0,
-              color: '#e8e8e8',
-              padding: '5px 0',
-              borderRadius: '3px',
-            }}
-          >
-            Cancel
-          </button>
-        </div>
+          Cancel
+        </button>
       </div>
-    </>
+    </section>
   )
 }
 

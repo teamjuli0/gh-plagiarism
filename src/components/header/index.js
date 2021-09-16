@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 import helpers from '../../utils'
+import './style.css'
+
 const { checkStr, handleKeyUp } = helpers
 
 const Header = (props) => {

@@ -1,0 +1,33 @@
+.inputIconDiv > .inputIcon:active {
+  border-radius: 4px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  background-color: #424242;
+  margin-bottom: 10px;
+}
+
+.inputIconDiv {
+  display: flex;
+  flex: 1 1 10%;
+  padding: 10px 2px;
+  cursor: pointer;
+}
+
+.inputDiv {
+  display: flex;
+  flex: 1 1 80%;
+  padding: 10px 0;
+}
+
+.inputDiv > input {
+  flex: 1 1 75%;
+  border: 0;
+  height: 30px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 0 10px;
+  background-color: #b2b2b2;
+}
