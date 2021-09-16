@@ -27,7 +27,7 @@ Navigate to the Chrome Web Store and install extension from there (link coming s
 
 1. Navigate to the [Chrome Extensions Page](chrome://extensions/) and hit the "Developer mode" toggle on the top right
 
-<img src="./step-1.png" style="width:650px; margin-left: 20px;" />
+<img src="./images/step-1.png" style="width:650px; margin-left: 20px;" alt="step 1 img" />
 <br>
 <br>
 
@@ -54,7 +54,7 @@ Navigate to the Chrome Web Store and install extension from there (link coming s
 3) After download finishes and with the `Chrome Extensions` tab open, just drag the `build` folder into the chrome browser.
 4) For ease-of-use, I recommend clicking on the cog on the top right, finding the "Gh Plagiarism Check" extension, and clicking the pin to pin it with your favorite extensions.
 
-<img src="./step-2.png" style="width:650px; margin-left: 20px;" />
+<img src="./images/step-2.png" style="width:650px; margin-left: 20px;" alt="step 2 img" />
 <br>
 <br>
 
