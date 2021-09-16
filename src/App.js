@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Footer, Header } from './components'
 import { History } from './views'
+import '@fortawesome/fontawesome-free/js/all.js'
 
 // import all css files
 import './fonts/Noto_Sans/index.css'
