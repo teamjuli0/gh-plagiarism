@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import ClearHistory from '../clearHistoryModal'
+import { ResetModal } from '../'
 import ScratchPad from '../../views/scratchpad'
 import SettingsPane from '../../views/settings'
 
@@ -83,7 +83,12 @@ const Footer = (props) => {
         toggleModel={() => toggleModel(settingsPopup)}
       />
 
-      {clearHistory ? <ClearHistory clearStorage={clearStorage} /> : null}
+      {clearHistory ? (
+        <ResetModal
+          text={`Are you sure you'd like to reset your search history and notes?`}
+          handleClick={clearStorage}
+        />
+      ) : null}
     </>
   )
 }

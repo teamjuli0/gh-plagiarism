@@ -1,10 +1,11 @@
-const ClearHistory = (props) => {
+const ResetModal = (props) => {
   return (
     <>
       <div
         style={{
           position: 'absolute',
           top: '15%',
+          padding: '10px 0',
           margin: '0 10px',
           width: '280px',
           minHeight: '120px',
@@ -15,12 +16,13 @@ const ClearHistory = (props) => {
       >
         <h1
           style={{
+            margin: '0 0 10px 0',
             padding: '0 10px',
             fontSize: '20px',
             textAlign: 'center',
           }}
         >
-          Are you sure you'd like to clear your history?
+          {props.text}
         </h1>
         <div
           style={{
@@ -32,7 +34,7 @@ const ClearHistory = (props) => {
           }}
         >
           <button
-            onClick={(e) => props.clearStorage(e)}
+            onClick={(e) => props.handleClick(e)}
             className='btn-reset inputIcon'
             style={{
               margin: '0 5px',
@@ -49,7 +51,7 @@ const ClearHistory = (props) => {
             I'm Sure
           </button>
           <button
-            onClick={(e) => props.clearStorage(e)}
+            onClick={(e) => props.handleClick(e)}
             className='btn-reset inputIcon'
             style={{
               margin: '0 5px',
@@ -71,4 +73,4 @@ const ClearHistory = (props) => {
   )
 }
 
-export default ClearHistory
+export default ResetModal

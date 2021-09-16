@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import helpers from '../../utils'
 import { Row, SectionWrapper } from '../../components/rows/'
-import ResetModal from '../../components/resetStorageModal'
+import { ResetModal } from '../../components/'
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
@@ -98,7 +98,7 @@ const SettingsPane = (props) => {
         {resetStorage ? (
           <ResetModal
             text={`Are you sure you'd like to reset your search history and notes?`}
-            resetStorage={clearStorage}
+            handleClick={clearStorage}
           />
         ) : null}
       </SectionWrapper>
