@@ -47,6 +47,7 @@ header {
 #submit-search > i {
   color: #e8e8e8;
 }
-#clear-search > i {
+
+.clear-search-i {
   color: #4d4d4d;
 }

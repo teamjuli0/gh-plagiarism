@@ -9,6 +9,12 @@ Searching for plagiarism on github can be a bit tidious. Github avoids very spec
 
 - [Installation](#installation)
 
+- [Beta Features](#beta-features)
+
+- [Updating](#updating)
+
+- [Uninstall](#uninstall)
+
 - [Example Query In](#example-query-in)
 
 - [Example URL Out](#example-url-out)
@@ -17,17 +23,19 @@ Searching for plagiarism on github can be a bit tidious. Github avoids very spec
 
 # Installation
 
-## Method 1: Chrome Web Store
+## Method 1: Chrome Web Store (Recommended)
 
-Navigate to the Chrome Web Store and install extension from there (link coming soon)
+This extension can be found on and installed through the [`Chrome Web Store`](https://chrome.google.com/webstore/detail/gh-plagiarism-check/fbnkdiommanmaggjbppgecgpekigaceb?hl=en&authuser=2). This is the recommended method of installation unless you want to try [`beta features`](#beta-features) before they are released. For regular manual install, proceed to the [`Manual Install`](#method-2-manual-install) section
 
 <br>
 
-## Method 2: Manual Install Through Developer Mode
+## Method 2: Manual Install
 
-1. Navigate to the [Chrome Extensions Page](chrome://extensions/) and hit the "Developer mode" toggle on the top right
+If you would like to install manually and get features faster, you can follow the instructions below. Please keep in mind that manual installation will not automatically install any updates, those will have to be installed using the instructions found [`below`](#updating). This is also a different branch from the one holding the beta features. If you're looking for beta features, please install the manual install instructions and after this, follow the instructions found in the [`beta`](#beta-features) section
 
-<img src="./step-1.png" style="width:650px; margin-left: 20px;" />
+1. Navigate to the Chrome Extensions Page [(`chrome://extensions/`)](chrome://extensions/) and hit the "Developer mode" toggle on the top right
+
+<img src="./images/step-1.png" style="width:650px; margin-left: 20px;" alt="step 1 img" />
 <br>
 <br>
 
@@ -36,27 +44,63 @@ Navigate to the Chrome Web Store and install extension from there (link coming s
    ` Windows:`
 
    ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run dev-install && explorer .
+   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && explorer .
    ```
 
    `Mac:`
 
    ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run dev-install && open .
+   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && open .
    ```
 
    `Linux:`
 
    ```
-   cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run dev-install && xdg-open .
+   cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && xdg-open .
    ```
 
-3) After download finishes and with the `Chrome Extensions` tab open, just drag the `build` folder into the chrome browser.
-4) For ease-of-use, I recommend clicking on the cog on the top right, finding the "Gh Plagiarism Check" extension, and clicking the pin to pin it with your favorite extensions.
+3) After download finishes and with the Chrome Extensions tab open, drag the `build` folder into the Chrome Extensions tab on the browser.
+4) For ease-of-use, I recommend clicking on the puzzle piece on the top right, finding the "Gh Plagiarism Check" extension, and clicking the pin to pin it with your favorite extensions.
 
-<img src="./step-2.png" style="width:650px; margin-left: 20px;" />
+<img src="./images/step-2.png" style="width:650px; margin-left: 20px;" alt="step 2 img" />
 <br>
 <br>
+
+## Beta Features
+
+For Beta Features, please run the following command after [`installation`](#method-2-manual-install). Updates will be installed the same way as the non-beta install:
+
+```
+cd ~/gh-plagiarism && npm run install-dev
+```
+
+## Updating
+
+If you installed the extension manually, you can update to the latest version by using the following command:
+
+```
+cd ~/gh-plagiarism && npm run update
+```
+
+## Uninstall
+
+Uninstalling this extension can be done with 2 easy steps
+
+1. Remove the chrome extension just as you would with any other extension
+
+2. Run the following command to remove all of the extension files from your computer
+
+   Windows:
+
+   ```
+   cd ~/ && rm -r ./gh-plagiarism
+   ```
+
+   Mac or Linux:
+
+   ```
+   cd ~/ && sudo rm -r ./gh-plagiarism
+   ```
 
 ## Example Query In
 

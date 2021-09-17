@@ -46,7 +46,7 @@ const Header = (props) => {
             id='clear-search'
             onClick={resetInput}
           >
-            <i class='fas fa-times'></i>
+            <i class='fas fa-times clear-search-i'></i>
           </button>
         ) : null}
         <button
