@@ -44,19 +44,19 @@ If you would like to install manually and get features faster, you can follow th
    ` Windows:`
 
    ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && explorer .
+   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && explorer .
    ```
 
    `Mac:`
 
    ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && open .
+   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && open .
    ```
 
    `Linux:`
 
    ```
-   cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install && xdg-open .
+   cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && xdg-open .
    ```
 
 3) After download finishes and with the Chrome Extensions tab open, drag the `build` folder into the Chrome Extensions tab on the browser.
