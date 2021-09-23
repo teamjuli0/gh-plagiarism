@@ -24,9 +24,14 @@ main {
   font-family: NotoSans;
   color: #e8e8e8;
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
 .inputIconActive:active {
   background-color: #343434;
 }
@@ -63,7 +68,7 @@ i {
 /* ======================= */
 
 .fs-modal-div {
-  position: absolute;
+  position: fixed;
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);

@@ -1,3 +1,9 @@
+.scratchpad {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .scratchpad > button {
   position: fixed;
   top: 10px;
