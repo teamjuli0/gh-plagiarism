@@ -7,9 +7,19 @@
 
 #noQueries {
   width: 100%;
-  padding: 10px 41px;
+  padding: 100px 35px;
   text-align: center;
   color: #999999;
+  font-size: 15px;
+}
+
+#noQueries > h1 {
+  margin: 10px 0 0 0;
+}
+
+#noQueries > h6 {
+  color: #212121;
+  margin: 0;
 }
 
 .searchDiv {

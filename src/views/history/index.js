@@ -9,7 +9,11 @@ const History = (props) => {
       {
         // if there is no searches in history, display appropriate h1 element
         props.searchHistory.length === 0 ? (
-          <h1 id='noQueries'>Enter Search Query Above!</h1>
+          <div id='noQueries'>
+            <h1>Cat Say Meow We Can Search...</h1>
+            <h6>Dad puns will never die</h6>
+            <i class='fas fa-cat fa-6x'></i>
+          </div>
         ) : (
           // if search history has one or more items, only grab the first 10 items and display one row per search
           <>
