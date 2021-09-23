@@ -18,9 +18,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch": "npm-watch",
-    "update": "git pull && npm run install",
-    "install": "npm install && npm run build",
-    "install-dev": "git checkout -b develop && npm run install"
+    "update": "git pull && npm run install-main",
+    "install-main": "npm install && npm run build",
+    "install-dev": "git checkout -b develop && npm run install-main"
   },
   "watch": {
     "build": "src/"
