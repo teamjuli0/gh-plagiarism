@@ -7,6 +7,9 @@ header {
   display: flex;
   background-color: #424242;
   margin-bottom: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .inputIconDiv {
