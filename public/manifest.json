@@ -3,7 +3,7 @@
 
   "name": "GH Plagiarism Check",
   "description": "This extension is a starting point to find plagiarism on github",
-  "version": "0.2.0",
+  "version": "0.3.0",
 
   "browser_action": {
     "default_popup": "index.html",

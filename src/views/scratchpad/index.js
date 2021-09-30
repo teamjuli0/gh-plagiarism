@@ -14,7 +14,7 @@ const ScratchPad = (props) => {
         className='btnReset inputIcon'
         onClick={() => props.toggleModel(props.notesPopup)}
       >
-        <i class='fas fa-times'></i>
+        <i className='fas fa-times'></i>
       </button>
       <h1>Scratchpad</h1>
       <textarea
@@ -25,9 +25,8 @@ const ScratchPad = (props) => {
     - notes
     - links 
     - etc.`}
-      >
-        {scratchpad}
-      </textarea>
+        defaultValue={scratchpad}
+      />
     </div>
   )
 }

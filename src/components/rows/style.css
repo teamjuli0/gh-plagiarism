@@ -17,7 +17,7 @@
 
 .settings-row {
   flex: 0 0 100%;
-  height: 35px;
+  min-height: 35px;
   color: #d9d9d9;
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +32,8 @@
   font-size: 13px;
 }
 
-.settings-row > button {
+.settings-row > button,
+.settings-row > div {
   flex: 0 0 30%;
   display: flex;
   justify-content: center;
@@ -40,8 +41,22 @@
   border-bottom: 0;
 }
 
+.settings-row > div > input {
+  border: 0;
+  height: 18px;
+  padding: 0 3px;
+  width: 40px;
+  text-align: center;
+  border-radius: 2px;
+}
+
 .section-wrapper {
   display: flex;
   flex: 0 0 100%;
   flex-wrap: wrap;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  opacity: 1;
 }
