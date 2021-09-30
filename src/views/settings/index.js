@@ -13,22 +13,14 @@ const SettingsPane = (props) => {
   const [historyLength, setLength] = useState(getHistoryLength)
 
   const handleLengthChange = (e) => {
-    // const num = e.target.value
-    // switch (true) {
-    //   case num === '' || parseInt(num) < 1:
-    //     return setLength(1)
-    //   case parseInt(num) > 200:
-    //     return setLength(200)
-    //   default:
-    //     setLength(num)
-    // }
-
-    console.log(e.target.value)
-
-    if (e.target.value === '' || parseInt(e.target.value) < 1) {
-      setLength(1)
-    } else {
-      setLength(e.target.value)
+    const num = e.target.value
+    switch (true) {
+      case num === '' || parseInt(num) < 1:
+        return setLength(1)
+      case parseInt(num) > 200:
+        return setLength(200)
+      default:
+        setLength(num)
     }
   }
 
