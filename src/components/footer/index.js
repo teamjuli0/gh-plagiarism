@@ -33,19 +33,19 @@ const Footer = (props) => {
           className='btnReset inputIcon inputIconActive'
           onClick={(e) => clearStorage(e)}
         >
-          <i class='fas fa-trash-alt'></i>
+          <i className='fas fa-trash-alt'></i>
         </button>
         <button
           className='btnReset inputIcon inputIconActive'
           onClick={() => toggleModel(notesPopup)}
         >
-          <i class='fas fa-book-open'></i>
+          <i className='fas fa-book-open'></i>
         </button>
         <button
           className='btnReset inputIcon inputIconActive'
           onClick={() => toggleModel(settingsPopup)}
         >
-          <i class='fas fa-ellipsis-h'></i>
+          <i className='fas fa-ellipsis-h'></i>
         </button>
       </footer>
       <ScratchPad
