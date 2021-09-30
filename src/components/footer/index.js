@@ -61,7 +61,7 @@ const Footer = (props) => {
 
       {clearHistory ? (
         <ResetModal
-          text={`Are you sure you'd like to reset your search history and notes?`}
+          text={`Are you sure you'd like to reset your search history?`}
           handleClick={clearStorage}
         />
       ) : null}
