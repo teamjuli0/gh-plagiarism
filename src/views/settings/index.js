@@ -6,7 +6,15 @@ import './style.css'
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
+  const getHistoryLength =
+    parseInt(localStorage.getItem('history-length')) || 100
+
   const [resetStorage, setResetStorage] = useState(false)
+  const [historyLength, setLength] = useState(getHistoryLength)
+
+  const handleLengthChange = (e) => {
+    setLength(e.target.value)
+  }
 
   const clearStorage = (e) => {
     setResetStorage(true)
@@ -27,9 +35,15 @@ const SettingsPane = (props) => {
     >
       <button
         className='btnReset inputIcon'
-        onClick={() => props.toggleModel(props.settingsPopup)}
+        onClick={() => {
+          localStorage.setItem('history-length', historyLength)
+          props.toggleModel(props.settingsPopup)
+          props.setSearchHistory([
+            ...props.searchHistory.slice(0, historyLength),
+          ])
+        }}
       >
-        <i class='fas fa-times'></i>
+        <i className='fas fa-times'></i>
       </button>
 
       <h1>Settings</h1>
@@ -83,7 +97,11 @@ const SettingsPane = (props) => {
           faClasses='fas fa-trash'
           onClick={(e) => clearStorage(e)}
         />
-
+        <Row
+          title='Maximum Search History Length'
+          historyLength={historyLength}
+          setLength={(e) => handleLengthChange(e)}
+        />
         {resetStorage ? (
           <ResetModal
             text={`Are you sure you'd like to reset your search history and notes?`}

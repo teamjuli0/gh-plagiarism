@@ -4,9 +4,24 @@ const Row = (props) => {
   return (
     <div className='settings-row'>
       <p>{props.title}</p>
-      <button className='btnReset inputIcon' onClick={(e) => props.onClick(e)}>
-        <i className={props.faClasses}></i>
-      </button>
+      {props.historyLength ? (
+        <div>
+          <input
+            min='9'
+            max='200'
+            type='number'
+            value={props.historyLength}
+            onChange={props.setLength}
+          ></input>
+        </div>
+      ) : (
+        <button
+          className='btnReset inputIcon'
+          onClick={(e) => props.onClick(e)}
+        >
+          <i className={props.faClasses}></i>
+        </button>
+      )}
     </div>
   )
 }

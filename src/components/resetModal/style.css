@@ -1,5 +1,14 @@
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 561px;
+  background-color: #0000008c;
+}
+
 .reset-modal-div {
-  position: absolute;
+  position: fixed;
   top: 15%;
   padding: 10px 0;
   margin: 0 10px;
