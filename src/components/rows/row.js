@@ -7,7 +7,7 @@ const Row = (props) => {
       {props.historyLength ? (
         <div>
           <input
-            min='9'
+            min='1'
             max='200'
             type='number'
             value={props.historyLength}

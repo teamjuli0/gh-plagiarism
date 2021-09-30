@@ -13,7 +13,11 @@ const SettingsPane = (props) => {
   const [historyLength, setLength] = useState(getHistoryLength)
 
   const handleLengthChange = (e) => {
-    setLength(e.target.value)
+    if (e.target.value === '' || parseInt(e.target.value) < 1) {
+      setLength(1)
+    } else {
+      setLength(e.target.value)
+    }
   }
 
   const clearStorage = (e) => {
@@ -47,6 +51,24 @@ const SettingsPane = (props) => {
       </button>
 
       <h1>Settings</h1>
+      <SectionWrapper title='General Settings'>
+        <Row
+          title='Reset Search History & Scratchpad'
+          faClasses='fas fa-sync-alt'
+          onClick={(e) => clearStorage(e)}
+        />
+        <Row
+          title='Maximum Search History Length'
+          historyLength={historyLength}
+          setLength={(e) => handleLengthChange(e)}
+        />
+        {resetStorage ? (
+          <ResetModal
+            text={`Are you sure you'd like to reset your search history and notes?`}
+            handleClick={clearStorage}
+          />
+        ) : null}
+      </SectionWrapper>
       <SectionWrapper title='Export Data'>
         <Row
           title='Export Search History as JSON File'
@@ -91,24 +113,6 @@ const SettingsPane = (props) => {
           }
         />
       </SectionWrapper>
-      <SectionWrapper title='General Settings'>
-        <Row
-          title='Reset All Notes & Search History'
-          faClasses='fas fa-trash'
-          onClick={(e) => clearStorage(e)}
-        />
-        <Row
-          title='Maximum Search History Length'
-          historyLength={historyLength}
-          setLength={(e) => handleLengthChange(e)}
-        />
-        {resetStorage ? (
-          <ResetModal
-            text={`Are you sure you'd like to reset your search history and notes?`}
-            handleClick={clearStorage}
-          />
-        ) : null}
-      </SectionWrapper>
       <SectionWrapper title='About'>
         <Row
           title='Github Repo'
@@ -118,11 +122,21 @@ const SettingsPane = (props) => {
           }
         />
         <Row
-          title='Feature Requests or Bugs'
-          faClasses='fas fa-bug'
+          title='Feature Requests'
+          faClasses='fas fa-lightbulb'
           onClick={(e) =>
             window.open(
               'https://github.com/teamjuli0/gh-plagiarism/issues',
+              '_blank'
+            )
+          }
+        />
+        <Row
+          title='Leave a Review!'
+          faClasses='fas fa-smile-beam'
+          onClick={(e) =>
+            window.open(
+              'https://chrome.google.com/webstore/detail/gh-plagiarism-check/fbnkdiommanmaggjbppgecgpekigaceb/reviews',
               '_blank'
             )
           }
