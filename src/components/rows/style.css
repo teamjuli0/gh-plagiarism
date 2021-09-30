@@ -32,12 +32,20 @@
   font-size: 13px;
 }
 
-.settings-row > button {
+.settings-row > button,
+.settings-row > div {
   flex: 0 0 30%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 0;
+}
+
+.settings-row > div > input {
+  border: 0;
+  padding: 0;
+  width: 40px;
+  text-align: center;
 }
 
 .section-wrapper {

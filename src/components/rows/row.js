@@ -5,28 +5,11 @@ const Row = (props) => {
     <div className='settings-row'>
       <p>{props.title}</p>
       {props.historyLength ? (
-        <div
-          style={{
-            flex: '0 0 30%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            border: 0,
-            padding: 0,
-          }}
-        >
+        <div>
           <input
-            style={{
-              border: 0,
-              padding: 0,
-              width: '40px',
-              textAlign: 'center',
-            }}
-            type='number'
-            id='quantity'
-            name='quantity'
             min='9'
             max='200'
+            type='number'
             value={props.historyLength}
             onChange={props.setLength}
           ></input>
