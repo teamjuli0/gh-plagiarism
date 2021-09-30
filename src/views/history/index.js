@@ -1,5 +1,6 @@
 import './style.css'
 import helpers from '../../utils'
+import uniqid from 'uniqid'
 
 const { bgColorBool, searchStr } = helpers
 
@@ -20,7 +21,7 @@ const History = (props) => {
             {props.searchHistory.map((search, i) => (
               <div
                 className='searchDiv'
-                key={search.date}
+                key={uniqid()}
                 style={
                   // alternate between background colors
                   bgColorBool(

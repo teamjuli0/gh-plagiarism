@@ -12,7 +12,7 @@ const Header = (props) => {
   const updateHistory = (newStr) =>
     props.setSearchHistory([
       { url: newStr, date: new Date().toLocaleString() },
-      ...props.searchHistory.slice(0, getHistoryLength),
+      ...props.searchHistory.slice(0, getHistoryLength - 1),
     ])
 
   const resetInput = () => {
