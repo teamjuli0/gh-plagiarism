@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Footer, Header } from './components'
 import { History } from './views'
+import SettingsProvider from './utils/SettingsContext'
 import '@fortawesome/fontawesome-free/js/all.js'
 
 // import all css files
@@ -19,18 +20,20 @@ function App() {
 
   return (
     <main>
-      <Header
-        searchHistory={searchHistory}
-        setSearchHistory={setSearchHistory}
-      />
-      <History
-        searchHistory={searchHistory}
-        setSearchHistory={setSearchHistory}
-      />
-      <Footer
-        searchHistory={searchHistory}
-        setSearchHistory={setSearchHistory}
-      />
+      <SettingsProvider>
+        <Header
+          searchHistory={searchHistory}
+          setSearchHistory={setSearchHistory}
+        />
+        <History
+          searchHistory={searchHistory}
+          setSearchHistory={setSearchHistory}
+        />
+        <Footer
+          searchHistory={searchHistory}
+          setSearchHistory={setSearchHistory}
+        />
+      </SettingsProvider>
     </main>
   )
 }
