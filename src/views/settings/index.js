@@ -18,11 +18,20 @@ const SettingsPane = (props) => {
     const num = e.target.value
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return setLength(1)
+        return updateSettings({ ...settings, 'history-length': 1 }, () => {
+          localStorage.setItem('settings', settings)
+        })
       case parseInt(num) > 200:
-        return setLength(200)
+        return updateSettings({ ...settings, 'history-length': 200 }, () => {
+          localStorage.setItem('settings', settings)
+        })
       default:
-        setLength(num)
+        updateSettings(
+          { ...settings, 'history-length': JSON.parse(num) },
+          () => {
+            localStorage.setItem('settings', settings)
+          }
+        )
     }
   }
 
@@ -46,7 +55,7 @@ const SettingsPane = (props) => {
       <button
         className='btnReset inputIcon'
         onClick={() => {
-          localStorage.setItem('history-length', historyLength)
+          // localStorage.setItem('history-length', historyLength)
           props.toggleModel(props.settingsPopup)
           props.setSearchHistory([
             ...props.searchHistory.slice(0, historyLength),
@@ -65,7 +74,7 @@ const SettingsPane = (props) => {
         />
         <Row
           title='Maximum Search History Length'
-          historyLength={historyLength}
+          historyLength={settings['history-length']}
           setLength={(e) => handleLengthChange(e)}
         />
         {resetStorage ? (
