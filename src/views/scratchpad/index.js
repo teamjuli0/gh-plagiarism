@@ -1,11 +1,19 @@
 import { useRef } from 'react'
+import { useData } from '../../utils/DataContext'
 import './style.css'
 
 const ScratchPad = (props) => {
+  const { data, updateData } = useData()
   const notesTxtArea = useRef()
-  let scratchpad = localStorage.getItem('gh-scratchpad') || ''
+  let scratchpad = data.scratchpad || ''
   const saveNotes = () => {
-    localStorage.setItem('gh-scratchpad', notesTxtArea.current.value)
+    localStorage.setItem(
+      'data',
+      JSON.stringify({
+        ...data,
+        scratchpad: notesTxtArea.current.value,
+      })
+    )
   }
 
   return (

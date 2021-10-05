@@ -5,7 +5,7 @@ import uniqid from 'uniqid'
 
 const { bgColorBool, searchStr } = helpers
 
-const History = (props) => {
+const History = () => {
   const { data, updateData } = useData()
   return (
     <section className='container'>

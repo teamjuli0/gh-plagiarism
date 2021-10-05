@@ -6,7 +6,7 @@ import './style.css'
 
 const { checkStr, handleKeyUp } = helpers
 
-const Header = (props) => {
+const Header = () => {
   const { data, updateData } = useData()
   const { settings } = useSettings()
   const inputEl = useRef()

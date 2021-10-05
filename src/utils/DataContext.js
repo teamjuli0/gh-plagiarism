@@ -4,32 +4,16 @@ export const useData = () => useContext(DataContext)
 
 const DataProvider = (props) => {
   const newObj = { history: [], scratchpad: '' }
+
   const [data, setData] = useState({
     ...newObj,
+    scratchpad: localStorage.getItem('gh-scratchpad'),
+    history: JSON.parse(localStorage.getItem('ghPlagiarismHistory')),
     ...JSON.parse(localStorage.getItem('data')),
   })
 
-  useEffect(() => {
-    const localHistory = JSON.parse(localStorage.getItem('ghPlagiarismHistory'))
-
-    console.log('============================')
-    console.log('in here too')
-    console.log(localHistory)
-    console.log('============================')
-
-    // Uncomment after finishing
-
-    // if (localHistory) {
-    //   setData({ ...data, history: localHistory })
-    // }
-
-    if (localHistory) {
-      setData({ ...data, history: localHistory })
-    }
-
-    localStorage.removeItem('ghPlagiarismHistory')
-    console.log('after removing ghplagiarismhistory')
-  }, [])
+  localStorage.removeItem('ghPlagiarismHistory')
+  localStorage.removeItem('gh-scratchpad')
 
   const updateData = (state) => {
     return setData(state)

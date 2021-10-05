@@ -8,7 +8,7 @@ import './style.css'
 
 const { toggleModel } = helpers
 
-const Footer = (props) => {
+const Footer = () => {
   const { data, updateData } = useData()
   const [clearHistory, setClearHistory] = useState(false)
 
