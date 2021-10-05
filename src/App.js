@@ -11,30 +11,13 @@ import './fonts/Pacifico/index.css'
 import './App.css'
 
 function App() {
-  const [searchHistory, setSearchHistory] = useState(
-    JSON.parse(localStorage.getItem('ghPlagiarismHistory')) || []
-  )
-
-  useEffect(() => {
-    localStorage.setItem('ghPlagiarismHistory', JSON.stringify(searchHistory))
-  }, [searchHistory])
-
   return (
     <main>
       <SettingsProvider>
         <DataProvider>
-          <Header
-            searchHistory={searchHistory}
-            setSearchHistory={setSearchHistory}
-          />
-          <History
-            searchHistory={searchHistory}
-            setSearchHistory={setSearchHistory}
-          />
-          <Footer
-            searchHistory={searchHistory}
-            setSearchHistory={setSearchHistory}
-          />
+          <Header />
+          <History />
+          <Footer />
         </DataProvider>
       </SettingsProvider>
     </main>

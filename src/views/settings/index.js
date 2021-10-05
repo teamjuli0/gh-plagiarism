@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import helpers from '../../utils'
 import { useSettings } from '../../utils/SettingsContext'
+import { useData } from '../../utils/DataContext'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import './style.css'
@@ -8,6 +9,7 @@ const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
   const { settings, updateSettings } = useSettings()
+  const { data, updateData } = useData()
   const [resetStorage, setResetStorage] = useState(false)
 
   const handleLengthChange = (e) => {
@@ -50,13 +52,7 @@ const SettingsPane = (props) => {
     >
       <button
         className='btnReset inputIcon'
-        onClick={() => {
-          // localStorage.setItem('history-length', historyLength)
-          props.toggleModel(props.settingsPopup)
-          props.setSearchHistory([
-            ...props.searchHistory.slice(0, settings['history-length']),
-          ])
-        }}
+        onClick={() => props.toggleModel(props.settingsPopup)}
       >
         <i className='fas fa-times'></i>
       </button>

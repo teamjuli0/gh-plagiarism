@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useData } from '../../utils/DataContext'
 import { useSettings } from '../../utils/SettingsContext'
 import helpers from '../../utils'
 import './style.css'
@@ -6,15 +7,21 @@ import './style.css'
 const { checkStr, handleKeyUp } = helpers
 
 const Header = (props) => {
-  const inputEl = useRef()
+  const { data, updateData } = useData()
   const { settings } = useSettings()
+  const inputEl = useRef()
   const [hasText, setHasText] = useState(false)
 
+  console.log(data)
+
   const updateHistory = (newStr) =>
-    props.setSearchHistory([
-      { url: newStr, date: new Date().toLocaleString() },
-      ...props.searchHistory.slice(0, settings['history-length'] - 1),
-    ])
+    updateData({
+      ...data,
+      history: [
+        { url: newStr, date: new Date().toLocaleString() },
+        ...data.history.slice(0, settings['history-length'] - 1),
+      ],
+    })
 
   const resetInput = () => {
     // whenever stop icon is pushed, reset ando focus on the input

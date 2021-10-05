@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { ResetModal } from '../'
+import { useData } from '../../utils/DataContext'
 import ScratchPad from '../../views/scratchpad'
 import SettingsPane from '../../views/settings'
 import helpers from '../../utils'
@@ -8,6 +9,7 @@ import './style.css'
 const { toggleModel } = helpers
 
 const Footer = (props) => {
+  const { data, updateData } = useData()
   const [clearHistory, setClearHistory] = useState(false)
 
   // const [showSettings, setShowSettings] = useState(false)
@@ -18,8 +20,8 @@ const Footer = (props) => {
   const clearStorage = (e) => {
     setClearHistory(true)
     if (e.target.innerHTML === `I'm Sure`) {
-      localStorage.setItem('ghPlagiarismHistory', '[]')
-      props.setSearchHistory([])
+      localStorage.setItem('data', { ...data, history: [] })
+      updateData({ ...data, history: [] })
       setClearHistory(false)
     } else if (e.target.innerHTML === `Cancel`) {
       setClearHistory(false)
@@ -54,8 +56,6 @@ const Footer = (props) => {
       />
       <SettingsPane
         settingsPopup={settingsPopup}
-        searchHistory={props.searchHistory}
-        setSearchHistory={props.setSearchHistory}
         toggleModel={() => toggleModel(settingsPopup)}
       />
 
