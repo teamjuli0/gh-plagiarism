@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import helpers from '../../utils'
+import { useSettings } from '../../utils/SettingsContext'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import './style.css'
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
+  const { settings, updateSettings } = useSettings()
+
   const getHistoryLength =
     parseInt(localStorage.getItem('history-length')) || 100
 
