@@ -9,8 +9,7 @@ const { jsonFile } = helpers
 const SettingsPane = (props) => {
   const { settings, updateSettings } = useSettings()
 
-  const getHistoryLength =
-    parseInt(localStorage.getItem('history-length')) || 100
+  const getHistoryLength = settings['history-length']
 
   const [resetStorage, setResetStorage] = useState(false)
   const [historyLength, setLength] = useState(getHistoryLength)
