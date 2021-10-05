@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 export const DataContext = React.createContext()
 export const useData = () => useContext(DataContext)
 
 const DataProvider = (props) => {
-  const newObj = { history: [], scratchpad: '' }
+  const oldHistory = JSON.parse(localStorage.getItem('ghPlagiarismHistory'))
+  const oldScratchpad = localStorage.getItem('gh-scratchpad')
 
-  const [data, setData] = useState({
-    ...newObj,
-    scratchpad: localStorage.getItem('gh-scratchpad'),
-    history: JSON.parse(localStorage.getItem('ghPlagiarismHistory')),
+  const newObj = {
+    history: oldHistory !== null ? oldHistory : [],
+    scratchpad: oldScratchpad !== null ? oldScratchpad : '',
     ...JSON.parse(localStorage.getItem('data')),
-  })
+  }
+
+  const [data, setData] = useState(newObj)
 
   localStorage.removeItem('ghPlagiarismHistory')
   localStorage.removeItem('gh-scratchpad')

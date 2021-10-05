@@ -7,6 +7,13 @@ const ScratchPad = (props) => {
   const notesTxtArea = useRef()
   let scratchpad = data.scratchpad || ''
   const saveNotes = () => {
+    // updateData(
+    //   JSON.stringify({
+    //     ...data,
+    //     scratchpad: notesTxtArea.current.value,
+    //   })
+    // )
+
     localStorage.setItem(
       'data',
       JSON.stringify({

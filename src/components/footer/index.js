@@ -20,7 +20,7 @@ const Footer = () => {
   const clearStorage = (e) => {
     setClearHistory(true)
     if (e.target.innerHTML === `I'm Sure`) {
-      localStorage.setItem('data', { ...data, history: [] })
+      localStorage.setItem('data', JSON.stringify({ ...data, history: [] }))
       updateData({ ...data, history: [] })
       setClearHistory(false)
     } else if (e.target.innerHTML === `Cancel`) {
