@@ -8,11 +8,7 @@ const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
   const { settings, updateSettings } = useSettings()
-
-  const getHistoryLength = settings['history-length']
-
   const [resetStorage, setResetStorage] = useState(false)
-  const [historyLength, setLength] = useState(getHistoryLength)
 
   const handleLengthChange = (e) => {
     const num = e.target.value
@@ -58,7 +54,7 @@ const SettingsPane = (props) => {
           // localStorage.setItem('history-length', historyLength)
           props.toggleModel(props.settingsPopup)
           props.setSearchHistory([
-            ...props.searchHistory.slice(0, historyLength),
+            ...props.searchHistory.slice(0, settings['history-length']),
           ])
         }}
       >
