@@ -1,5 +1,6 @@
 <p align="center">
- <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo">
+  <a href="https://github.com/teamjuli0/gh-plagiarism" rel="noopener">
+ <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Gh Plagiarism Check</h3>
@@ -28,6 +29,7 @@
 - [Authors](#authors)
 - [Example URL Out](#example-url-out)
 - [Questions](#questions)
+- [Screenshots](#screenshots)
 
 ## <img id="about" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/about.png" style="height: 40px">
 
@@ -59,3 +61,7 @@ This extension can be found on and installed through the [`Chrome Web Store`](ht
 ## <img id="questions" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/questions-alt.png" style="height: 40px">
 
 - Feel free to open an issue or contact me directly at valdezjulio95@gmail.com if you have any questions about the repo. You can find more of my work at [teamjuli0](https://github.com/teamjuli0/).
+
+## <img id="screenshots" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/screenshots.png" style="height: 40px">
+
+<img style="margin: 0 0 15px 0" src="./images/screenshot-overview.png" ></a>
