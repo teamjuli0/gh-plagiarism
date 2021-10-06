@@ -1,11 +1,24 @@
 import { useRef } from 'react'
+import { useData } from '../../utils/'
 import './style.css'
 
 const ScratchPad = (props) => {
+  const { data, updateData } = useData()
   const notesTxtArea = useRef()
-  let scratchpad = localStorage.getItem('gh-scratchpad') || ''
-  const saveNotes = () => {
-    localStorage.setItem('gh-scratchpad', notesTxtArea.current.value)
+
+  const saveNotes = (value) => {
+    updateData({
+      ...data,
+      scratchpad: value,
+    })
+
+    localStorage.setItem(
+      'data',
+      JSON.stringify({
+        ...data,
+        scratchpad: value,
+      })
+    )
   }
 
   return (
@@ -18,14 +31,14 @@ const ScratchPad = (props) => {
       </button>
       <h1>Scratchpad</h1>
       <textarea
-        onKeyUp={saveNotes}
+        onChange={(e) => saveNotes(e.target.value)}
         ref={notesTxtArea}
         rows='31'
         placeholder={`Use this scratchpad for quick storage of things like:
     - notes
     - links 
     - etc.`}
-        defaultValue={scratchpad}
+        value={data.scratchpad}
       />
     </div>
   )
