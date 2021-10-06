@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { useData } from '../../utils/'
 import './style.css'
 
@@ -6,17 +6,17 @@ const ScratchPad = (props) => {
   const { data, updateData } = useData()
   const notesTxtArea = useRef()
 
-  const saveNotes = () => {
+  const saveNotes = (value) => {
     updateData({
       ...data,
-      scratchpad: notesTxtArea.current.value,
+      scratchpad: value,
     })
 
     localStorage.setItem(
       'data',
       JSON.stringify({
         ...data,
-        scratchpad: notesTxtArea.current.value,
+        scratchpad: value,
       })
     )
   }
@@ -31,14 +31,14 @@ const ScratchPad = (props) => {
       </button>
       <h1>Scratchpad</h1>
       <textarea
-        onKeyUp={saveNotes}
+        onChange={(e) => saveNotes(e.target.value)}
         ref={notesTxtArea}
         rows='31'
         placeholder={`Use this scratchpad for quick storage of things like:
     - notes
     - links 
     - etc.`}
-        defaultValue={data.scratchpad}
+        value={data.scratchpad}
       />
     </div>
   )

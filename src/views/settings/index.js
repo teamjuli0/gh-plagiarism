@@ -62,7 +62,7 @@ const SettingsPane = (props) => {
         onClick={() => {
           props.toggleModel(props.settingsPopup)
           setTimeout(() => {
-            window.location.reload()
+            setConfirmReset(false)
           }, 400)
         }}
       >
@@ -112,7 +112,7 @@ const SettingsPane = (props) => {
                 paddingLeft: '10px',
               }}
             >
-              Reset Successful...
+              Reset Successful! 🔥
             </p>
           </div>
         ) : null}
