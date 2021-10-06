@@ -1,140 +1,62 @@
-# Gh Plagiarism Check
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo"></a>
+</p>
 
-Searching for plagiarism on github can be a bit tidious. Github avoids very specific characters on all of its queries so if you search for something that contains any of those characters, odds are your search will come out empty handed. After spending minutes removing these characters manually time and time again, I came to the realization that it would be much easier if all I had to do was copy, paste, and hit a button. This is how Gh Plagiarism Check came to be. This extension is very light and easy to use. It keeps track of your last 10 searches made by taking in short or long queries, removing anything that github deems unvalueable for searches and creates a new more precise query which opens up automatically in a new tab under github code search. Couldn't get easier than that!
-<br>
+<h3 align="center">Gh Plagiarism Check</h3>
 
-![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)
+<div align="center">
 
-## Table of Contents
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+[![GitHub Issues](https://img.shields.io/github/issues/teamjuli0/gh-plagiarism.svg)](https://github.com/teamjuli0/gh-plagiarism/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/teamjuli0/gh-plagiarism.svg)](https://github.com/teamjuli0/gh-plagiarism/pulls)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
-- [Installation](#installation)
+</div>
 
-- [Beta Features](#beta-features)
+---
 
-- [Updating](#updating)
+<p align="center"> Looking for suspected plagiarism has never been easier!
+    <br> 
+</p>
 
-- [Uninstall](#uninstall)
+## <img src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/table-of-context.png" style="height: 40px">
 
-- [Example Query In](#example-query-in)
-
+- [About](#about)
+- [Installing](#installing)
+- [Usage](#usage)
+- [Built With](#built_using)
+- [Authors](#authors)
 - [Example URL Out](#example-url-out)
-
 - [Questions](#questions)
 
-# Installation
+## <img id="about" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/about.png" style="height: 40px">
 
-## Method 1: Chrome Web Store (Recommended)
+Searching for plagiarism on github can be a bit tidious. Github avoids very specific characters on all of its queries so if you search for something that contains any of those characters, odds are your search will come out empty handed. After spending minutes removing these characters manually time and time again, I came to the realization that it would be much easier if all I had to do was copy, paste, and hit a button. This is how Gh Plagiarism Check came to be. This extension is very light and easy to use. It keeps track of your last 10 searches made by taking in short or long queries, removing anything that github deems unvalueable for searches and creates a new more precise query which opens up automatically in a new tab under github code search. Couldn't get easier than that!
 
-This extension can be found on and installed through the [`Chrome Web Store`](https://chrome.google.com/webstore/detail/gh-plagiarism-check/fbnkdiommanmaggjbppgecgpekigaceb?hl=en&authuser=2). This is the recommended method of installation unless you want to try [`beta features`](#beta-features) before they are released. For regular manual install, proceed to the [`Manual Install`](#method-2-manual-install) section
+## <img id="installing" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/installing.png" style="height: 40px">
 
-<br>
+This extension can be found on and installed through the [`Chrome Web Store`](https://chrome.google.com/webstore/detail/gh-plagiarism-check/fbnkdiommanmaggjbppgecgpekigaceb?hl=en&authuser=2). For beta features or to get this project running locally, please refer to the manual install documentation of the [`Wiki`](https://github.com/teamjuli0/gh-plagiarism/wiki/Local-Installation).
 
-## Method 2: Manual Install
+## <img id="usage" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/usage.png" style="height: 40px">
 
-If you would like to install manually and get features faster, you can follow the instructions below. Please keep in mind that manual installation will not automatically install any updates, those will have to be installed using the instructions found [`below`](#updating). This is also a different branch from the one holding the beta features. If you're looking for beta features, please install the manual install instructions and after this, follow the instructions found in the [`beta`](#beta-features) section
+1. Enter search query into input on the top of the extension and hit enter/search button. This will redirect you back to github searches with a search query that more closely matches github's search criteria.
+2. To remove an item from your search history, hit the "backspace" icon on the right of that history item.
+3. To remove all search items at the same time, hit the trashbin on the bottom left of the footer and confirm on the popup.
+4. To jot down quick notes on the scratchpad, click on the book icon in the center of the footer.
+5. You can easily export your data or view it raw on a new tab inside of the settings tab. Here you can also set the maximum length for your search history if you wanted to change it from the default.
 
-1. Navigate to the Chrome Extensions Page [(`chrome://extensions/`)](chrome://extensions/) and hit the "Developer mode" toggle on the top right
+## <img id="built_using" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/built-using.png" style="height: 40px">
 
-<img src="./images/step-1.png" style="width:650px; margin-left: 20px;" alt="step 1 img" />
-<br>
-<br>
+- Chrome Extension
+- React.js
+- Javascript
 
-2. To download the chrome extension manually, open a terminal and use the following bash command:
+## <img id="authors" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/authors.png" style="height: 40px">
 
-   ` Windows:`
+- [@teamjuli0](https://github.com/teamjuli0) - Idea & Initial work
+- See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
-   ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && explorer .
-   ```
+## <img id="questions" src="https://raw.githubusercontent.com/teamjuli0/confirmed/main/images/menu-categories/questions-alt.png" style="height: 40px">
 
-   `Mac:`
-
-   ```
-   cd ~ && git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && open .
-   ```
-
-   `Linux:`
-
-   ```
-   cd ~ &&  git clone https://github.com/teamjuli0/gh-plagiarism.git && cd ~/gh-plagiarism && npm run install-main && xdg-open .
-   ```
-
-3) After download finishes and with the Chrome Extensions tab open, drag the `build` folder into the Chrome Extensions tab on the browser.
-4) For ease-of-use, I recommend clicking on the puzzle piece on the top right, finding the "Gh Plagiarism Check" extension, and clicking the pin to pin it with your favorite extensions.
-
-<img src="./images/step-2.png" style="width:650px; margin-left: 20px;" alt="step 2 img" />
-<br>
-<br>
-
-## Beta Features
-
-For Beta Features, please run the following command after [`installation`](#method-2-manual-install). Updates will be installed the same way as the non-beta install:
-
-```
-cd ~/gh-plagiarism && npm run install-dev
-```
-
-## Updating
-
-If you installed the extension manually, you can update to the latest version by using the following command:
-
-```
-cd ~/gh-plagiarism && npm run update
-```
-
-## Uninstall
-
-Uninstalling this extension can be done with 2 easy steps
-
-1. Remove the chrome extension just as you would with any other extension
-
-2. Run the following command to remove all of the extension files from your computer
-
-   Windows:
-
-   ```
-   cd ~/ && rm -r ./gh-plagiarism
-   ```
-
-   Mac or Linux:
-
-   ```
-   cd ~/ && sudo rm -r ./gh-plagiarism
-   ```
-
-## Example Query In
-
-```javascript
-function asyncCopyTo(from, to) {
-  return asyncMkDirP(path.dirname(to)).then(
-    () =>
-      new Promise((resolve, reject) => {
-        ncp(from, to, (error) => {
-          if (error) {
-            // Wrap to have a useful stack trace.
-            reject(new Error(error))
-          } else {
-            // Wait for copied files to exist; ncp() sometimes completes prematurely.
-            // For more detail, see github.com/facebook/react/issues/22323
-            // Also github.com/AvianFlu/ncp/issues/127
-            setTimeout(resolve, 10)
-          }
-        })
-      })
-  )
-}
-```
-
-## Example URL Out
-
-Gh Plagiarism Check: [1 Result (as of writing)](https://github.com/search?q=function+asyncCopyTo+from+to+return+asyncMkDirP+path+dirname+to+then+new+Promise+resolve+reject+ncp+from+to+error+if+error+Wrap+to+have+a+useful+stack+trace+reject+new+Error+error+else+Wait+for+copied+files+to+exist+ncp+sometimes+completes+prematurely+For+more+detail+see+github+com+facebook+react+issues+22323+Also+github+com+AvianFlu+ncp+issues+127+setTimeout+resolve+10&type=code)
-
-Github Search: [0 Results (as of writing)](https://github.com/search?q=function+asyncCopyTo%28from%2C+to%29+%7B+++return+asyncMkDirP%28path.dirname%28to%29%29.then%28+++++%28%29+%3D%3E+++++++new+Promise%28%28resolve%2C+reject%29+%3D%3E+%7B+++++++++ncp%28from%2C+to%2C+error+%3D%3E+%7B+++++++++++if+%28error%29+%7B+++++++++++++%2F%2F+Wrap+to+have+a+useful+stack+trace.+++++++++++++reject%28new+Error%28error%29%29%3B+++++++++++%7D+else+%7B+++++++++++++%2F%2F+Wait+for+copied+files+to+exist%3B+ncp%28%29+sometimes+completes+prematurely.+++++++++++++%2F%2F+For+more+detail%2C+see+github.com%2Ffacebook%2Freact%2Fissues%2F22323+++++++++++++%2F%2F+Also+github.com%2FAvianFlu%2Fncp%2Fissues%2F127+++++++++++++setTimeout%28resolve%2C+10%29%3B+++++++++++%7D+++++++++%7D%29%3B+++++++%7D%29+++%29%3B+%7D&type=code)
-
-## License
-
-This project is licensed under the [MIT license](./license.txt).
-
-## Questions
-
-Feel free to open an issue or contact me directly at valdezjulio95@gmail.com if you have any questions about the repo. You can find more of my work at [teamjuli0](https://github.com/teamjuli0/).
+- Feel free to open an issue or contact me directly at valdezjulio95@gmail.com if you have any questions about the repo. You can find more of my work at [teamjuli0](https://github.com/teamjuli0/).
