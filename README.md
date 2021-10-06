@@ -1,6 +1,5 @@
 <p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo"></a>
+ <img width=200px height=200px src="./images/logo-round-dark.png" alt="Project logo">
 </p>
 
 <h3 align="center">Gh Plagiarism Check</h3>
