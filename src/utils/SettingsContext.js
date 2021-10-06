@@ -14,7 +14,6 @@ const SettingsProvider = (props) => {
 
     // // if previous exists, overide default settings values with existing settings
     if (historyLengthSingle) {
-      console.log('inside history single')
       setSettings({ ...settings, 'history-length': historyLengthSingle })
     }
 

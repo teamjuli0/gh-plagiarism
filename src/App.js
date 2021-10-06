@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react'
-import { Footer, Header } from './components'
-import { History } from './views'
-import SettingsProvider from './utils/SettingsContext'
-import DataProvider from './utils/DataContext'
-import '@fortawesome/fontawesome-free/js/all.js'
-
-// import all css files
+// import css & fonts
+import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
-import './App.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 
+// import history view & footer/header components
+import { History } from './views'
+import { Footer, Header } from './components'
+
+// import data & settings providers for "global state"
+import { DataProvider, SettingsProvider } from './utils/'
+
+// create app component which contains data & settings providers
 function App() {
   return (
     <main>
@@ -24,4 +26,5 @@ function App() {
   )
 }
 
+// export app component
 export default App

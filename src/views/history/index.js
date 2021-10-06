@@ -1,8 +1,6 @@
 import './style.css'
-import { useData } from '../../utils/DataContext'
-import helpers from '../../utils'
 import uniqid from 'uniqid'
-
+import { useData, helpers } from '../../utils/'
 const { bgColorBool, searchStr } = helpers
 
 const History = () => {
@@ -15,7 +13,7 @@ const History = () => {
           <div id='noQueries'>
             <h1>Cat Say Meow We Can Search...</h1>
             <h6>Dad puns will never die</h6>
-            <i class='fas fa-cat fa-6x'></i>
+            <i className='fas fa-cat fa-6x'></i>
           </div>
         ) : (
           // if search history has one or more items, only grab the first 10 items and display one row per search

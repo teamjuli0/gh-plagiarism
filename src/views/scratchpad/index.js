@@ -1,18 +1,16 @@
-import { useRef } from 'react'
-import { useData } from '../../utils/DataContext'
+import { useEffect, useRef, useState } from 'react'
+import { useData } from '../../utils/'
 import './style.css'
 
 const ScratchPad = (props) => {
   const { data, updateData } = useData()
   const notesTxtArea = useRef()
-  let scratchpad = data.scratchpad || ''
+
   const saveNotes = () => {
-    // updateData(
-    //   JSON.stringify({
-    //     ...data,
-    //     scratchpad: notesTxtArea.current.value,
-    //   })
-    // )
+    updateData({
+      ...data,
+      scratchpad: notesTxtArea.current.value,
+    })
 
     localStorage.setItem(
       'data',
@@ -40,7 +38,7 @@ const ScratchPad = (props) => {
     - notes
     - links 
     - etc.`}
-        defaultValue={scratchpad}
+        defaultValue={data.scratchpad}
       />
     </div>
   )

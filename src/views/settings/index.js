@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import helpers from '../../utils'
-import { useSettings } from '../../utils/SettingsContext'
-import { useData } from '../../utils/DataContext'
+import { useState, useRef } from 'react'
+import { useSettings, useData, helpers } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import './style.css'
+
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
+  const confirmDiv = useRef()
   const { settings, updateSettings } = useSettings()
-  const { data, updateData } = useData()
+  const { updateData } = useData()
+
   const [resetStorage, setResetStorage] = useState(false)
+  const [confirmReset, setConfirmReset] = useState(false)
 
   const handleLengthChange = (e) => {
     const num = e.target.value
@@ -36,10 +38,15 @@ const SettingsPane = (props) => {
   const clearStorage = (e) => {
     setResetStorage(true)
     if (e.target.innerHTML === `I'm Sure`) {
-      localStorage.setItem('ghPlagiarismHistory', '[]')
-      localStorage.setItem('gh-scratchpad', '')
+      setResetStorage(false)
+      setConfirmReset(true)
 
-      window.location.reload()
+      updateData({ history: [], scratchpad: '' })
+      localStorage.setItem(
+        'data',
+        JSON.stringify({ history: [], scratchpad: '' })
+      )
+      setResetStorage(false)
     } else if (e.target.innerHTML === `Cancel`) {
       setResetStorage(false)
     }
@@ -52,7 +59,12 @@ const SettingsPane = (props) => {
     >
       <button
         className='btnReset inputIcon'
-        onClick={() => props.toggleModel(props.settingsPopup)}
+        onClick={() => {
+          props.toggleModel(props.settingsPopup)
+          setTimeout(() => {
+            window.location.reload()
+          }, 400)
+        }}
       >
         <i className='fas fa-times'></i>
       </button>
@@ -74,6 +86,35 @@ const SettingsPane = (props) => {
             text={`Are you sure you'd like to reset your search history and notes?`}
             handleClick={clearStorage}
           />
+        ) : null}
+        {confirmReset ? (
+          <div
+            ref={confirmDiv}
+            className='fade-in'
+            style={{
+              position: 'fixed',
+              top: '103px',
+              width: '100%',
+              height: '35px',
+              background: 'linear-gradient(227deg, #00aab2, #887aff)',
+              backgroundSize: '200% 200%',
+              animation: 'AnimationName 7s ease infinite, fadein 0.25s',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'white',
+              fontSize: '13px',
+              fontFamily: 'Noto Sans',
+            }}
+          >
+            <p
+              style={{
+                flex: '0 0 72%',
+                paddingLeft: '10px',
+              }}
+            >
+              Reset Successful...
+            </p>
+          </div>
         ) : null}
       </SectionWrapper>
       <SectionWrapper title='Export Data'>

@@ -1,18 +1,14 @@
 import { useRef, useState } from 'react'
-import { useData } from '../../utils/DataContext'
-import { useSettings } from '../../utils/SettingsContext'
-import helpers from '../../utils'
+import { useData, useSettings, helpers } from '../../utils/'
 import './style.css'
 
 const { checkStr, handleKeyUp } = helpers
 
 const Header = () => {
-  const { data, updateData } = useData()
   const { settings } = useSettings()
+  const { data, updateData } = useData()
   const inputEl = useRef()
   const [hasText, setHasText] = useState(false)
-
-  console.log(data)
 
   const updateHistory = (newStr) =>
     updateData({
