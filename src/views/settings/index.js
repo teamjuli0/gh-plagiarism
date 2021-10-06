@@ -123,18 +123,18 @@ const SettingsPane = (props) => {
           faClasses='fas fa-file-download'
           onClick={() =>
             jsonFile(
-              'gh-search-history.json',
-              localStorage.getItem('ghPlagiarismHistory')
+              'history.json',
+              JSON.stringify(JSON.parse(localStorage.getItem('data')).history)
             )
           }
         />
         <Row
-          title='Export Notes as Text File'
+          title='Export Scratchpad as Text File'
           faClasses='fas fa-file-download'
           onClick={() =>
             jsonFile(
-              'gh-search-notes.txt',
-              localStorage.getItem('gh-scratchpad')
+              'scratchpad.txt',
+              JSON.parse(localStorage.getItem('data')).scratchpad
             )
           }
         />
@@ -143,8 +143,8 @@ const SettingsPane = (props) => {
           faClasses='fas fa-align-left'
           onClick={() =>
             jsonFile(
-              'gh-search-history.json',
-              JSON.parse(localStorage.getItem('ghPlagiarismHistory')),
+              'history.json',
+              JSON.stringify(JSON.parse(localStorage.getItem('data')).history),
               true
             )
           }
@@ -154,8 +154,8 @@ const SettingsPane = (props) => {
           faClasses='fas fa-align-left'
           onClick={() =>
             jsonFile(
-              'gh-search-notes.txt',
-              localStorage.getItem('gh-scratchpad'),
+              'scratchpad.txt',
+              JSON.parse(localStorage.getItem('data')).scratchpad,
               true
             )
           }
