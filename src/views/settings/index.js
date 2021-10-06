@@ -1,36 +1,52 @@
-import { useState } from 'react'
-import helpers from '../../utils'
+import { useState, useRef } from 'react'
+import { useSettings, useData, helpers } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import './style.css'
+
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
-  const getHistoryLength =
-    parseInt(localStorage.getItem('history-length')) || 100
+  const confirmDiv = useRef()
+  const { settings, updateSettings } = useSettings()
+  const { updateData } = useData()
 
   const [resetStorage, setResetStorage] = useState(false)
-  const [historyLength, setLength] = useState(getHistoryLength)
+  const [confirmReset, setConfirmReset] = useState(false)
 
   const handleLengthChange = (e) => {
     const num = e.target.value
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return setLength(1)
+        return updateSettings({ ...settings, 'history-length': 1 }, () => {
+          localStorage.setItem('settings', settings)
+        })
       case parseInt(num) > 200:
-        return setLength(200)
+        return updateSettings({ ...settings, 'history-length': 200 }, () => {
+          localStorage.setItem('settings', settings)
+        })
       default:
-        setLength(num)
+        updateSettings(
+          { ...settings, 'history-length': JSON.parse(num) },
+          () => {
+            localStorage.setItem('settings', settings)
+          }
+        )
     }
   }
 
   const clearStorage = (e) => {
     setResetStorage(true)
     if (e.target.innerHTML === `I'm Sure`) {
-      localStorage.setItem('ghPlagiarismHistory', '[]')
-      localStorage.setItem('gh-scratchpad', '')
+      setResetStorage(false)
+      setConfirmReset(true)
 
-      window.location.reload()
+      updateData({ history: [], scratchpad: '' })
+      localStorage.setItem(
+        'data',
+        JSON.stringify({ history: [], scratchpad: '' })
+      )
+      setResetStorage(false)
     } else if (e.target.innerHTML === `Cancel`) {
       setResetStorage(false)
     }
@@ -44,11 +60,10 @@ const SettingsPane = (props) => {
       <button
         className='btnReset inputIcon'
         onClick={() => {
-          localStorage.setItem('history-length', historyLength)
           props.toggleModel(props.settingsPopup)
-          props.setSearchHistory([
-            ...props.searchHistory.slice(0, historyLength),
-          ])
+          setTimeout(() => {
+            setConfirmReset(false)
+          }, 400)
         }}
       >
         <i className='fas fa-times'></i>
@@ -63,7 +78,7 @@ const SettingsPane = (props) => {
         />
         <Row
           title='Maximum Search History Length'
-          historyLength={historyLength}
+          historyLength={settings['history-length']}
           setLength={(e) => handleLengthChange(e)}
         />
         {resetStorage ? (
@@ -72,6 +87,35 @@ const SettingsPane = (props) => {
             handleClick={clearStorage}
           />
         ) : null}
+        {confirmReset ? (
+          <div
+            ref={confirmDiv}
+            className='fade-in'
+            style={{
+              position: 'fixed',
+              top: '103px',
+              width: '100%',
+              height: '35px',
+              background: 'linear-gradient(227deg, #00aab2, #887aff)',
+              backgroundSize: '200% 200%',
+              animation: 'AnimationName 7s ease infinite, fadein 0.25s',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'white',
+              fontSize: '13px',
+              fontFamily: 'Noto Sans',
+            }}
+          >
+            <p
+              style={{
+                flex: '0 0 72%',
+                paddingLeft: '10px',
+              }}
+            >
+              Reset Successful! 🔥
+            </p>
+          </div>
+        ) : null}
       </SectionWrapper>
       <SectionWrapper title='Export Data'>
         <Row
@@ -79,18 +123,18 @@ const SettingsPane = (props) => {
           faClasses='fas fa-file-download'
           onClick={() =>
             jsonFile(
-              'gh-search-history.json',
-              localStorage.getItem('ghPlagiarismHistory')
+              'history.json',
+              JSON.stringify(JSON.parse(localStorage.getItem('data')).history)
             )
           }
         />
         <Row
-          title='Export Notes as Text File'
+          title='Export Scratchpad as Text File'
           faClasses='fas fa-file-download'
           onClick={() =>
             jsonFile(
-              'gh-search-notes.txt',
-              localStorage.getItem('gh-scratchpad')
+              'scratchpad.txt',
+              JSON.parse(localStorage.getItem('data')).scratchpad
             )
           }
         />
@@ -99,8 +143,8 @@ const SettingsPane = (props) => {
           faClasses='fas fa-align-left'
           onClick={() =>
             jsonFile(
-              'gh-search-history.json',
-              JSON.parse(localStorage.getItem('ghPlagiarismHistory')),
+              'history.json',
+              JSON.stringify(JSON.parse(localStorage.getItem('data')).history),
               true
             )
           }
@@ -110,8 +154,8 @@ const SettingsPane = (props) => {
           faClasses='fas fa-align-left'
           onClick={() =>
             jsonFile(
-              'gh-search-notes.txt',
-              localStorage.getItem('gh-scratchpad'),
+              'scratchpad.txt',
+              JSON.parse(localStorage.getItem('data')).scratchpad,
               true
             )
           }

@@ -10,7 +10,7 @@
 
 # production
 /build
-/build.zip
+/*.zip
 /images/prod
 
 # misc

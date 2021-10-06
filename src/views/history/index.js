@@ -1,24 +1,24 @@
 import './style.css'
-import helpers from '../../utils'
 import uniqid from 'uniqid'
-
+import { useData, helpers } from '../../utils/'
 const { bgColorBool, searchStr } = helpers
 
-const History = (props) => {
+const History = () => {
+  const { data, updateData } = useData()
   return (
     <section className='container'>
       {
         // if there is no searches in history, display appropriate h1 element
-        props.searchHistory.length === 0 ? (
+        data.history.length === 0 ? (
           <div id='noQueries'>
             <h1>Cat Say Meow We Can Search...</h1>
             <h6>Dad puns will never die</h6>
-            <i class='fas fa-cat fa-6x'></i>
+            <i className='fas fa-cat fa-6x'></i>
           </div>
         ) : (
           // if search history has one or more items, only grab the first 10 items and display one row per search
           <>
-            {props.searchHistory.map((search, i) => (
+            {data.history.map((search, i) => (
               <div
                 className='searchDiv'
                 key={uniqid()}
@@ -28,7 +28,7 @@ const History = (props) => {
                     i,
                     '#424242',
                     '#303030',
-                    i === props.searchHistory.length - 1
+                    i === data.history.length - 1
                       ? {
                           marginBottom: '60px',
                         }
@@ -53,11 +53,12 @@ const History = (props) => {
                   className='btnReset deleteQueryBtn'
                   onClick={() =>
                     // when clicking the backspace button, remove that specific search based on the item's date
-                    props.setSearchHistory(
-                      props.searchHistory.filter((stateSearch) =>
+                    updateData({
+                      ...data,
+                      history: data.history.filter((stateSearch) =>
                         search.date !== stateSearch.date ? true : false
-                      )
-                    )
+                      ),
+                    })
                   }
                 >
                   <i className='fas fa-backspace'></i>
