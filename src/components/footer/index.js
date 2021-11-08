@@ -1,6 +1,6 @@
 // import react hooks, data context & modal for reset history button
 import { useState, useRef } from 'react'
-import { useData, helpers } from '../../utils/'
+import { helpers } from '../../utils/'
 import { ResetModal } from '../'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -18,7 +18,6 @@ const { toggleModel } = helpers
 // create footer component
 const Footer = () => {
   // import global data & data update function
-  // const { data, updateData } = useData()
   const [clearHistory, setClearHistory] = useState(false)
 
   const dispatch = useDispatch()

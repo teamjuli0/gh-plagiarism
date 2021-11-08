@@ -9,6 +9,15 @@ const reducer = (state = {}, action) => {
       localStorage.setItem('data', JSON.stringify(updatedHistory.data))
 
       return updatedHistory
+    case 'updateScratchpad':
+      const updatedScratchpad = {
+        settings: { ...state.settings },
+        data: { ...state.data, scratchpad: action.payload },
+      }
+
+      localStorage.setItem('data', JSON.stringify(updatedScratchpad.data))
+
+      return updatedScratchpad
     case 'updateSettings':
       const updatedSettings = {
         data: { ...state.data },

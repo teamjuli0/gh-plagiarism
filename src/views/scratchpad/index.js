@@ -1,16 +1,19 @@
 import { useRef } from 'react'
-import { useData } from '../../utils/'
+// import { useData } from '../../utils/'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state'
 import './style.css'
 
 const ScratchPad = (props) => {
-  const { data, updateData } = useData()
   const notesTxtArea = useRef()
 
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.data)
+  const { updateScratchpad } = bindActionCreators(actionCreators, dispatch)
+
   const saveNotes = (value) => {
-    updateData({
-      ...data,
-      scratchpad: value,
-    })
+    updateScratchpad(value)
 
     localStorage.setItem(
       'data',
