@@ -1,23 +1,18 @@
 import { useRef, useState } from 'react'
 import { useData, useSettings, helpers } from '../../utils/'
+import { useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import './style.css'
+import { actionCreators } from '../../state'
 
 const { checkStr, handleKeyUp } = helpers
 
 const Header = () => {
-  const { settings } = useSettings()
-  const { data, updateData } = useData()
+  const dispatch = useDispatch()
+  const { updateHistory } = bindActionCreators(actionCreators, dispatch)
+
   const inputEl = useRef()
   const [hasText, setHasText] = useState(false)
-
-  const updateHistory = (newStr) =>
-    updateData({
-      ...data,
-      history: [
-        { url: newStr, date: new Date().toLocaleString() },
-        ...data.history.slice(0, settings['history-length'] - 1),
-      ],
-    })
 
   const resetInput = () => {
     // whenever stop icon is pushed, reset ando focus on the input
@@ -28,7 +23,11 @@ const Header = () => {
 
   const submitOnEnter = (e) => {
     inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
-    handleKeyUp(e, () => checkStr(inputEl, (str) => updateHistory(str)))
+    handleKeyUp(e, () =>
+      checkStr(inputEl, (str) =>
+        updateHistory({ url: str, date: new Date().toLocaleString() })
+      )
+    )
   }
 
   const handleInputFocus = (e) => {
@@ -57,7 +56,11 @@ const Header = () => {
         <button
           className='btnReset inputIcon inputIconActive'
           id='submit-search'
-          onClick={() => checkStr(inputEl, (str) => updateHistory(str))}
+          onClick={() =>
+            checkStr(inputEl, (str) =>
+              updateHistory({ url: str, date: new Date().toLocaleString() })
+            )
+          }
         >
           <i className='fas fa-search'></i>
         </button>

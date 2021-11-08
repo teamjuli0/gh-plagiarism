@@ -1,8 +1,17 @@
-export const updateData = (item) => {
+export const updateHistory = (item) => {
   return (dispatch) => {
     dispatch({
-      type: 'update',
+      type: 'updateHistory',
       payload: item,
+    })
+  }
+}
+
+export const updateSettings = (setting) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'updateSettings',
+      payload: setting,
     })
   }
 }

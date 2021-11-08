@@ -17,7 +17,7 @@ function App() {
   return (
     <main>
       <Provider store={store}>
-        {/* <Header /> */}
+        <Header />
         <History />
         {/* <Footer /> */}
       </Provider>
