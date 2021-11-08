@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-// import { useData } from '../../utils/'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../../state'
@@ -13,6 +12,7 @@ const ScratchPad = (props) => {
   const { updateScratchpad } = bindActionCreators(actionCreators, dispatch)
 
   const saveNotes = (value) => {
+    console.log(updateScratchpad)
     updateScratchpad(value)
 
     localStorage.setItem(

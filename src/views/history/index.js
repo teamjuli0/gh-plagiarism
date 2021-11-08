@@ -10,7 +10,7 @@ const { bgColorBool, searchStr } = helpers
 const History = () => {
   const dispatch = useDispatch()
   const history = useSelector((state) => state.data.history)
-  const { updateHistory } = bindActionCreators(actionCreators, dispatch)
+  const { filterHistory } = bindActionCreators(actionCreators, dispatch)
 
   return (
     <section className='container'>
@@ -60,7 +60,7 @@ const History = () => {
                   className='btnReset deleteQueryBtn'
                   onClick={() =>
                     // when clicking the backspace button, remove that specific search based on the item's date
-                    updateHistory(
+                    filterHistory(
                       history.filter((stateSearch) =>
                         search.date !== stateSearch.date ? true : false
                       )

@@ -2,14 +2,22 @@ import { useState, useRef } from 'react'
 import { useSettings, useData, helpers } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state'
 import './style.css'
 
 const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
   const confirmDiv = useRef()
-  const { settings, updateSettings } = useSettings()
-  const { updateData } = useData()
+
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.settings)
+  const { resetData, updateSettings } = bindActionCreators(
+    actionCreators,
+    dispatch
+  )
 
   const [resetStorage, setResetStorage] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
@@ -18,20 +26,17 @@ const SettingsPane = (props) => {
     const num = e.target.value
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return updateSettings({ ...settings, 'history-length': 1 }, () => {
+        return updateSettings({ 'history-length': 1 }, () => {
           localStorage.setItem('settings', settings)
         })
       case parseInt(num) > 200:
-        return updateSettings({ ...settings, 'history-length': 200 }, () => {
+        return updateSettings({ 'history-length': 200 }, () => {
           localStorage.setItem('settings', settings)
         })
       default:
-        updateSettings(
-          { ...settings, 'history-length': JSON.parse(num) },
-          () => {
-            localStorage.setItem('settings', settings)
-          }
-        )
+        updateSettings({ 'history-length': JSON.parse(num) }, () => {
+          localStorage.setItem('settings', settings)
+        })
     }
   }
 
@@ -41,7 +46,7 @@ const SettingsPane = (props) => {
       setResetStorage(false)
       setConfirmReset(true)
 
-      updateData({ history: [], scratchpad: '' })
+      resetData({ history: [], scratchpad: '' })
       localStorage.setItem(
         'data',
         JSON.stringify({ history: [], scratchpad: '' })

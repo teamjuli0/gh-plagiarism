@@ -9,7 +9,7 @@ const { checkStr, handleKeyUp } = helpers
 
 const Header = () => {
   const dispatch = useDispatch()
-  const { updateHistory } = bindActionCreators(actionCreators, dispatch)
+  const { addToHistory } = bindActionCreators(actionCreators, dispatch)
 
   const inputEl = useRef()
   const [hasText, setHasText] = useState(false)
@@ -25,7 +25,7 @@ const Header = () => {
     inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
     handleKeyUp(e, () =>
       checkStr(inputEl, (str) =>
-        updateHistory({ url: str, date: new Date().toLocaleString() })
+        addToHistory({ url: str, date: new Date().toLocaleString() })
       )
     )
   }
@@ -58,7 +58,7 @@ const Header = () => {
           id='submit-search'
           onClick={() =>
             checkStr(inputEl, (str) =>
-              updateHistory({ url: str, date: new Date().toLocaleString() })
+              addToHistory({ url: str, date: new Date().toLocaleString() })
             )
           }
         >

@@ -1,41 +1,44 @@
 const reducer = (state = {}, action) => {
+  console.log(state)
   switch (action.type) {
-    case 'updateHistory':
+    case 'addToHistory':
       const updatedHistory = {
-        settings: { ...state.settings },
-        data: { ...state.data, history: [action.payload, ...state.data] },
+        ...state,
+        history: [action.payload, ...state.history],
       }
 
-      localStorage.setItem('data', JSON.stringify(updatedHistory.data))
+      console.log(updatedHistory)
+      localStorage.setItem('data', JSON.stringify(updatedHistory))
 
       return updatedHistory
-    case 'updateScratchpad':
-      const updatedScratchpad = {
-        settings: { ...state.settings },
-        data: { ...state.data, scratchpad: action.payload },
+    case 'filterHistory':
+      const filteredHistory = {
+        ...state,
+        history: action.payload,
       }
 
-      localStorage.setItem('data', JSON.stringify(updatedScratchpad.data))
+      console.log(filteredHistory)
+      localStorage.setItem('data', JSON.stringify(filteredHistory))
+
+      return filteredHistory
+    case 'updateScratchpad':
+      const updatedScratchpad = { ...state, scratchpad: action.payload }
+
+      localStorage.setItem('data', JSON.stringify(updatedScratchpad))
 
       return updatedScratchpad
-    case 'updateSettings':
-      const updatedSettings = {
-        data: { ...state.data },
-        settings: { ...state.settings, ...action.payload },
-      }
-
-      localStorage.setItem('settings', JSON.stringify(updatedSettings))
-
-      return updatedSettings
     case 'resetHistory':
-      const resetHistory = {
-        settings: { ...state.settings },
-        data: { ...state.data, history: [] },
-      }
+      const resetHistory = { ...state, history: [] }
+      console.log(resetHistory)
+      localStorage.setItem('data', JSON.stringify(resetHistory))
 
-      localStorage.setItem('data', JSON.stringify(resetHistory.data))
-
+      console.log(resetHistory)
       return resetHistory
+    case 'resetData':
+      const resetData = { ...state, history: [] }
+      localStorage.setItem('data', JSON.stringify(resetData))
+
+      return resetData
     default:
       return state
   }
