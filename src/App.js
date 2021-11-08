@@ -9,19 +9,18 @@ import { History } from './views'
 import { Footer, Header } from './components'
 
 // import data & settings providers for "global state"
-import { DataProvider, SettingsProvider } from './utils/'
+import { Provider } from 'react-redux'
+import { store } from './state/store'
 
 // create app component which contains data & settings providers
 function App() {
   return (
     <main>
-      <SettingsProvider>
-        <DataProvider>
-          <Header />
-          <History />
-          <Footer />
-        </DataProvider>
-      </SettingsProvider>
+      <Provider store={store}>
+        {/* <Header /> */}
+        <History />
+        {/* <Footer /> */}
+      </Provider>
     </main>
   )
 }

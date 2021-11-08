@@ -1,15 +1,22 @@
 import './style.css'
 import uniqid from 'uniqid'
-import { useData, helpers } from '../../utils/'
+import { useSelector, useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state/'
+import { helpers } from '../../utils/'
+
 const { bgColorBool, searchStr } = helpers
 
 const History = () => {
-  const { data, updateData } = useData()
+  const dispatch = useDispatch()
+  const history = useSelector((state) => state.data.history)
+  const { updateData } = bindActionCreators(actionCreators, dispatch)
+
   return (
     <section className='container'>
       {
         // if there is no searches in history, display appropriate h1 element
-        data.history.length === 0 ? (
+        history.length === 0 ? (
           <div id='noQueries'>
             <h1>Cat Say Meow We Can Search...</h1>
             <h6>Dad puns will never die</h6>
@@ -18,7 +25,7 @@ const History = () => {
         ) : (
           // if search history has one or more items, only grab the first 10 items and display one row per search
           <>
-            {data.history.map((search, i) => (
+            {history.map((search, i) => (
               <div
                 className='searchDiv'
                 key={uniqid()}
@@ -28,7 +35,7 @@ const History = () => {
                     i,
                     '#424242',
                     '#303030',
-                    i === data.history.length - 1
+                    i === history.length - 1
                       ? {
                           marginBottom: '60px',
                         }
@@ -53,12 +60,11 @@ const History = () => {
                   className='btnReset deleteQueryBtn'
                   onClick={() =>
                     // when clicking the backspace button, remove that specific search based on the item's date
-                    updateData({
-                      ...data,
-                      history: data.history.filter((stateSearch) =>
+                    updateData(
+                      history.filter((stateSearch) =>
                         search.date !== stateSearch.date ? true : false
-                      ),
-                    })
+                      )
+                    )
                   }
                 >
                   <i className='fas fa-backspace'></i>
