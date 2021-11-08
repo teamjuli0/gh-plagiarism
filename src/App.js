@@ -19,7 +19,7 @@ function App() {
       <Provider store={store}>
         <Header />
         <History />
-        {/* <Footer /> */}
+        <Footer />
       </Provider>
     </main>
   )

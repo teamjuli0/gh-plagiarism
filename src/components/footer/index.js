@@ -2,6 +2,9 @@
 import { useState, useRef } from 'react'
 import { useData, helpers } from '../../utils/'
 import { ResetModal } from '../'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state'
 
 // import css stylesheet
 import './style.css'
@@ -15,8 +18,12 @@ const { toggleModel } = helpers
 // create footer component
 const Footer = () => {
   // import global data & data update function
-  const { data, updateData } = useData()
+  // const { data, updateData } = useData()
   const [clearHistory, setClearHistory] = useState(false)
+
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.data)
+  const { resetHistory } = bindActionCreators(actionCreators, dispatch)
 
   // references to notes & settings popups
   const notesPopup = useRef()
@@ -34,7 +41,7 @@ const Footer = () => {
       localStorage.setItem('data', JSON.stringify({ ...data, history: [] }))
 
       // update global data  to empty history array
-      updateData({ ...data, history: [] })
+      resetHistory()
 
       // reset state for clearHistory to hide confirm prompt
       setClearHistory(false)

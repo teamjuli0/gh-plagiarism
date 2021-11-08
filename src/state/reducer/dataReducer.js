@@ -18,6 +18,15 @@ const reducer = (state = {}, action) => {
       localStorage.setItem('settings', JSON.stringify(updatedSettings))
 
       return updatedSettings
+    case 'resetHistory':
+      const resetHistory = {
+        settings: { ...state.settings },
+        data: { ...state.data, history: [] },
+      }
+
+      localStorage.setItem('data', JSON.stringify(resetHistory.data))
+
+      return resetHistory
     default:
       return state
   }
