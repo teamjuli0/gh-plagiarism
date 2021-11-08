@@ -29,6 +29,7 @@ localStorage.removeItem('ghPlagiarismHistory')
 localStorage.removeItem('gh-scratchpad')
 
 localStorage.setItem('data', JSON.stringify(newObj))
+localStorage.setItem('settings', JSON.stringify(newSettings))
 
 export const store = createStore(
   reducers,
