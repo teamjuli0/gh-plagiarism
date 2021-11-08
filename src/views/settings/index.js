@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useSettings, useData, helpers } from '../../utils/'
+import { helpers } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,8 +14,8 @@ const SettingsPane = (props) => {
 
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
-  console.log(settings)
-  const { resetData, updateSettings } = bindActionCreators(
+
+  const { resetData, updateHistory, updateSettings } = bindActionCreators(
     actionCreators,
     dispatch
   )
@@ -25,6 +25,7 @@ const SettingsPane = (props) => {
 
   const handleLengthChange = (e) => {
     const num = e.target.value
+    console.log(typeof num)
     switch (true) {
       case num === '' || parseInt(num) < 1:
         return updateSettings({ 'history-length': 1 }, () => {
@@ -67,6 +68,7 @@ const SettingsPane = (props) => {
         className='btnReset inputIcon'
         onClick={() => {
           props.toggleModel(props.settingsPopup)
+          updateHistory()
           setTimeout(() => {
             setConfirmReset(false)
           }, 400)

@@ -2,16 +2,6 @@ import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducer'
 import thunk from 'redux-thunk'
 
-// create new file from this
-const oldHistory = JSON.parse(localStorage.getItem('ghPlagiarismHistory'))
-const oldScratchpad = localStorage.getItem('gh-scratchpad')
-
-const newObj = {
-  history: oldHistory !== null ? oldHistory : [],
-  scratchpad: oldScratchpad !== null ? oldScratchpad : '',
-  ...JSON.parse(localStorage.getItem('data')),
-}
-
 const newSettings = JSON.parse(localStorage.getItem('settings')) || {
   'history-length': 200,
 }
@@ -23,13 +13,22 @@ if (historyLengthSingle) {
   newSettings['history-length'] = historyLengthSingle
 }
 
+// create new file from this
+const oldHistory = JSON.parse(localStorage.getItem('ghPlagiarismHistory'))
+const oldScratchpad = localStorage.getItem('gh-scratchpad')
+
+const newObj = {
+  history: oldHistory !== null ? oldHistory : [],
+  scratchpad: oldScratchpad !== null ? oldScratchpad : '',
+  ...JSON.parse(localStorage.getItem('data')),
+}
+
 localStorage.removeItem('history-length')
 
 localStorage.removeItem('ghPlagiarismHistory')
 localStorage.removeItem('gh-scratchpad')
 
 localStorage.setItem('data', JSON.stringify(newObj))
-console.log(newObj)
 
 export const store = createStore(
   reducers,

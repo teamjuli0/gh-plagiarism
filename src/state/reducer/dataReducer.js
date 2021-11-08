@@ -1,13 +1,20 @@
 const reducer = (state = {}, action) => {
-  console.log(state)
   switch (action.type) {
     case 'addToHistory':
-      const updatedHistory = {
+      const newHistory = {
         ...state,
-        history: [action.payload, ...state.history],
+        history: [action.payload, ...state.history.slice(0, action.length - 1)],
       }
 
-      console.log(updatedHistory)
+      localStorage.setItem('data', JSON.stringify(newHistory))
+
+      return newHistory
+    case 'updateHistory':
+      const updatedHistory = {
+        ...state,
+        history: [...state.history.slice(0, action.length)],
+      }
+
       localStorage.setItem('data', JSON.stringify(updatedHistory))
 
       return updatedHistory
@@ -17,7 +24,6 @@ const reducer = (state = {}, action) => {
         history: action.payload,
       }
 
-      console.log(filteredHistory)
       localStorage.setItem('data', JSON.stringify(filteredHistory))
 
       return filteredHistory
@@ -29,10 +35,9 @@ const reducer = (state = {}, action) => {
       return updatedScratchpad
     case 'resetHistory':
       const resetHistory = { ...state, history: [] }
-      console.log(resetHistory)
+
       localStorage.setItem('data', JSON.stringify(resetHistory))
 
-      console.log(resetHistory)
       return resetHistory
     case 'resetData':
       const resetData = { ...state, history: [] }

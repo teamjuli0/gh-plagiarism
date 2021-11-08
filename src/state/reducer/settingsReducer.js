@@ -3,7 +3,6 @@ const reducer = (state = {}, action) => {
     case 'updateSettings':
       const updatedSettings = { ...action.payload }
 
-      console.log(updatedSettings)
       localStorage.setItem('settings', JSON.stringify(updatedSettings))
 
       return updatedSettings

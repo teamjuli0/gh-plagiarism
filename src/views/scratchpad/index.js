@@ -12,7 +12,6 @@ const ScratchPad = (props) => {
   const { updateScratchpad } = bindActionCreators(actionCreators, dispatch)
 
   const saveNotes = (value) => {
-    console.log(updateScratchpad)
     updateScratchpad(value)
 
     localStorage.setItem(

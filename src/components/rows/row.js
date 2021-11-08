@@ -1,7 +1,6 @@
 import './style.css'
 
 const Row = (props) => {
-  console.log(props)
   return (
     <div className='settings-row'>
       <p>{props.title}</p>
