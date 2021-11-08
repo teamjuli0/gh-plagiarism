@@ -14,6 +14,7 @@ const SettingsPane = (props) => {
 
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
+  console.log(settings)
   const { resetData, updateSettings } = bindActionCreators(
     actionCreators,
     dispatch

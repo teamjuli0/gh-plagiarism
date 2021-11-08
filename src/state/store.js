@@ -12,6 +12,19 @@ const newObj = {
   ...JSON.parse(localStorage.getItem('data')),
 }
 
+const newSettings = JSON.parse(localStorage.getItem('settings')) || {
+  'history-length': 200,
+}
+// check if settings exist in localstorage (previous version of app held settings individually instead of an object)
+const historyLengthSingle = parseInt(localStorage.getItem('history-length'))
+
+// // if previous exists, overide default settings values with existing settings
+if (historyLengthSingle) {
+  newSettings['history-length'] = historyLengthSingle
+}
+
+localStorage.removeItem('history-length')
+
 localStorage.removeItem('ghPlagiarismHistory')
 localStorage.removeItem('gh-scratchpad')
 
@@ -22,6 +35,7 @@ export const store = createStore(
   reducers,
   {
     data: newObj,
+    settings: newSettings,
   },
   applyMiddleware(thunk)
 )

@@ -1,11 +1,9 @@
 const reducer = (state = {}, action) => {
   switch (action.type) {
     case 'updateSettings':
-      const updatedSettings = {
-        data: { ...state.data },
-        settings: { ...state.settings, ...action.payload },
-      }
+      const updatedSettings = { ...action.payload }
 
+      console.log(updatedSettings)
       localStorage.setItem('settings', JSON.stringify(updatedSettings))
 
       return updatedSettings

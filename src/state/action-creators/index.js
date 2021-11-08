@@ -42,3 +42,12 @@ export const resetHistory = (history) => {
     })
   }
 }
+
+export const resetData = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'resetData',
+      payload: data,
+    })
+  }
+}
