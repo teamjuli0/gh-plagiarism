@@ -28,17 +28,11 @@ const SettingsPane = (props) => {
     console.log(typeof num)
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return updateSettings({ 'history-length': 1 }, () => {
-          localStorage.setItem('settings', settings)
-        })
+        return updateSettings({ 'history-length': 1 }, () => {})
       case parseInt(num) > 200:
-        return updateSettings({ 'history-length': 200 }, () => {
-          localStorage.setItem('settings', settings)
-        })
+        return updateSettings({ 'history-length': 200 }, () => {})
       default:
-        updateSettings({ 'history-length': JSON.parse(num) }, () => {
-          localStorage.setItem('settings', settings)
-        })
+        updateSettings({ 'history-length': JSON.parse(num) }, () => {})
     }
   }
 
@@ -47,13 +41,9 @@ const SettingsPane = (props) => {
     if (e.target.innerHTML === `I'm Sure`) {
       setResetStorage(false)
       setConfirmReset(true)
+      setResetStorage(false)
 
       resetData({ history: [], scratchpad: '' })
-      localStorage.setItem(
-        'data',
-        JSON.stringify({ history: [], scratchpad: '' })
-      )
-      setResetStorage(false)
     } else if (e.target.innerHTML === `Cancel`) {
       setResetStorage(false)
     }

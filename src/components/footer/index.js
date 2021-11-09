@@ -35,11 +35,6 @@ const Footer = () => {
 
     // check whether user confirmed or declined on resetting search history
     if (e.target.innerHTML === `I'm Sure`) {
-      // if confirm...
-      // update local storage to empty history array
-      localStorage.setItem('data', JSON.stringify({ ...data, history: [] }))
-
-      // update global data  to empty history array
       resetHistory()
 
       // reset state for clearHistory to hide confirm prompt

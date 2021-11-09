@@ -11,18 +11,6 @@ const ScratchPad = (props) => {
   const data = useSelector((state) => state.data)
   const { updateScratchpad } = bindActionCreators(actionCreators, dispatch)
 
-  const saveNotes = (value) => {
-    updateScratchpad(value)
-
-    localStorage.setItem(
-      'data',
-      JSON.stringify({
-        ...data,
-        scratchpad: value,
-      })
-    )
-  }
-
   return (
     <div className='hidden fs-modal-div scratchpad' ref={props.notesPopup}>
       <button
@@ -33,7 +21,7 @@ const ScratchPad = (props) => {
       </button>
       <h1>Scratchpad</h1>
       <textarea
-        onChange={(e) => saveNotes(e.target.value)}
+        onChange={(e) => updateScratchpad(e.target.value)}
         ref={notesTxtArea}
         rows='31'
         placeholder={`Use this scratchpad for quick storage of things like:

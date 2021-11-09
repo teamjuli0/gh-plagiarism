@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
-import { useData, useSettings, helpers } from '../../utils/'
-import { useSelector, useDispatch } from 'react-redux'
+import { helpers } from '../../utils/'
+import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './style.css'
 import { actionCreators } from '../../state'
