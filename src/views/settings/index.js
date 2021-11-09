@@ -1,37 +1,36 @@
 import { useState, useRef } from 'react'
-import { useSettings, useData, helpers } from '../../utils/'
+import { jsonFile } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state'
 import './style.css'
-
-const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
   const confirmDiv = useRef()
-  const { settings, updateSettings } = useSettings()
-  const { updateData } = useData()
+
+  const dispatch = useDispatch()
+  const settings = useSelector((state) => state.settings)
+
+  const { resetData, updateHistory, updateSettings } = bindActionCreators(
+    actionCreators,
+    dispatch
+  )
 
   const [resetStorage, setResetStorage] = useState(false)
   const [confirmReset, setConfirmReset] = useState(false)
 
   const handleLengthChange = (e) => {
     const num = e.target.value
+    console.log(typeof num)
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return updateSettings({ ...settings, 'history-length': 1 }, () => {
-          localStorage.setItem('settings', settings)
-        })
+        return updateSettings({ 'history-length': 1 }, () => {})
       case parseInt(num) > 200:
-        return updateSettings({ ...settings, 'history-length': 200 }, () => {
-          localStorage.setItem('settings', settings)
-        })
+        return updateSettings({ 'history-length': 200 }, () => {})
       default:
-        updateSettings(
-          { ...settings, 'history-length': JSON.parse(num) },
-          () => {
-            localStorage.setItem('settings', settings)
-          }
-        )
+        updateSettings({ 'history-length': JSON.parse(num) }, () => {})
     }
   }
 
@@ -40,13 +39,9 @@ const SettingsPane = (props) => {
     if (e.target.innerHTML === `I'm Sure`) {
       setResetStorage(false)
       setConfirmReset(true)
-
-      updateData({ history: [], scratchpad: '' })
-      localStorage.setItem(
-        'data',
-        JSON.stringify({ history: [], scratchpad: '' })
-      )
       setResetStorage(false)
+
+      resetData({ history: [], scratchpad: '' })
     } else if (e.target.innerHTML === `Cancel`) {
       setResetStorage(false)
     }
@@ -61,6 +56,7 @@ const SettingsPane = (props) => {
         className='btnReset inputIcon'
         onClick={() => {
           props.toggleModel(props.settingsPopup)
+          updateHistory()
           setTimeout(() => {
             setConfirmReset(false)
           }, 400)

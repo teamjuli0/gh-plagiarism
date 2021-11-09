@@ -1,25 +1,15 @@
 import { useRef } from 'react'
-import { useData } from '../../utils/'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../../state'
 import './style.css'
 
 const ScratchPad = (props) => {
-  const { data, updateData } = useData()
   const notesTxtArea = useRef()
 
-  const saveNotes = (value) => {
-    updateData({
-      ...data,
-      scratchpad: value,
-    })
-
-    localStorage.setItem(
-      'data',
-      JSON.stringify({
-        ...data,
-        scratchpad: value,
-      })
-    )
-  }
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.data)
+  const { updateScratchpad } = bindActionCreators(actionCreators, dispatch)
 
   return (
     <div className='hidden fs-modal-div scratchpad' ref={props.notesPopup}>
@@ -31,7 +21,7 @@ const ScratchPad = (props) => {
       </button>
       <h1>Scratchpad</h1>
       <textarea
-        onChange={(e) => saveNotes(e.target.value)}
+        onChange={(e) => updateScratchpad(e.target.value)}
         ref={notesTxtArea}
         rows='31'
         placeholder={`Use this scratchpad for quick storage of things like:
