@@ -13,7 +13,7 @@ const SettingsPane = (props) => {
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
 
-  const { resetData, updateHistory, updateSettings } = bindActionCreators(
+  const { resetData, updateSettings } = bindActionCreators(
     actionCreators,
     dispatch
   )
@@ -23,7 +23,7 @@ const SettingsPane = (props) => {
 
   const handleLengthChange = (e) => {
     const num = e.target.value
-    console.log(typeof num)
+
     switch (true) {
       case num === '' || parseInt(num) < 1:
         return updateSettings({ 'history-length': 1 }, () => {})
@@ -41,7 +41,7 @@ const SettingsPane = (props) => {
       setConfirmReset(true)
       setResetStorage(false)
 
-      resetData({ history: [], scratchpad: '' })
+      resetData()
     } else if (e.target.innerHTML === `Cancel`) {
       setResetStorage(false)
     }
@@ -56,7 +56,7 @@ const SettingsPane = (props) => {
         className='btnReset inputIcon'
         onClick={() => {
           props.toggleModel(props.settingsPopup)
-          updateHistory()
+          resetData()
           setTimeout(() => {
             setConfirmReset(false)
           }, 400)

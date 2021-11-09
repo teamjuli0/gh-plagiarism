@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
       return resetHistory
 
     case 'resetData':
-      const resetData = { ...state, history: [] }
+      const resetData = { history: [], scratchpad: '' }
       return resetData
     default:
       return state

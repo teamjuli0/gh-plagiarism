@@ -13,8 +13,6 @@ import { Footer, Header } from './components'
 import { Provider } from 'react-redux'
 import { store } from './state/store'
 
-console.log(store.getState())
-
 store.subscribe(() => {
   saveData({
     ...store.getState().data,

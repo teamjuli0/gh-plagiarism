@@ -8,7 +8,6 @@ import { searchStr, bgColorBool } from '../../utils/'
 const History = () => {
   const dispatch = useDispatch()
   const history = useSelector((state) => state.data.history)
-  console.log(history)
   const { filterHistory } = bindActionCreators(actionCreators, dispatch)
 
   return (
