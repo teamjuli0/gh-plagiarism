@@ -1,8 +1,8 @@
 // import react hooks, data context & modal for reset history button
 import { useState, useRef } from 'react'
-import { helpers } from '../../utils/'
+import { toggleModel } from '../../utils/'
 import { ResetModal } from '../'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../../state'
 
@@ -12,16 +12,12 @@ import './style.css'
 // import scratchpad & settings views
 import { ScratchPad, SettingsPane } from '../../views/'
 
-// deconstruct helper toggle model function
-const { toggleModel } = helpers
-
 // create footer component
 const Footer = () => {
   // import global data & data update function
   const [clearHistory, setClearHistory] = useState(false)
 
   const dispatch = useDispatch()
-  const data = useSelector((state) => state.data)
   const { resetHistory } = bindActionCreators(actionCreators, dispatch)
 
   // references to notes & settings popups

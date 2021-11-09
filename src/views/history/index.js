@@ -3,9 +3,7 @@ import uniqid from 'uniqid'
 import { useSelector, useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../../state/'
-import { helpers } from '../../utils/'
-
-const { bgColorBool, searchStr } = helpers
+import { searchStr, bgColorBool } from '../../utils/'
 
 const History = () => {
   const dispatch = useDispatch()

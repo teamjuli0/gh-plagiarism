@@ -3,12 +3,7 @@ import './App.css'
 import './fonts/Noto_Sans/index.css'
 import './fonts/Pacifico/index.css'
 import '@fortawesome/fontawesome-free/js/all.js'
-import {
-  loadData,
-  loadSettings,
-  saveData,
-  saveSettings,
-} from './utils/localStorage'
+import { saveData, saveSettings } from './utils/'
 
 // import history view & footer/header components
 import { History } from './views'

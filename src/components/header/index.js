@@ -1,11 +1,9 @@
 import { useRef, useState } from 'react'
-import { helpers } from '../../utils/'
+import { checkStr } from '../../utils/'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './style.css'
 import { actionCreators } from '../../state'
-
-const { checkStr, handleKeyUp } = helpers
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -23,11 +21,11 @@ const Header = () => {
 
   const submitOnEnter = (e) => {
     inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
-    handleKeyUp(e, () =>
+    if (e.keyCode === 13) {
       checkStr(inputEl, (str) =>
         addToHistory({ url: str, date: new Date().toLocaleString() })
       )
-    )
+    }
   }
 
   const handleInputFocus = (e) => {

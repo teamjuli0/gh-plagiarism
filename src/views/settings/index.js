@@ -1,13 +1,11 @@
 import { useState, useRef } from 'react'
-import { helpers } from '../../utils/'
+import { jsonFile } from '../../utils/'
 import { Row, SectionWrapper } from '../../components/rows/'
 import { ResetModal } from '../../components/'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionCreators } from '../../state'
 import './style.css'
-
-const { jsonFile } = helpers
 
 const SettingsPane = (props) => {
   const confirmDiv = useRef()
