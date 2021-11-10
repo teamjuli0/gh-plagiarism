@@ -12,8 +12,9 @@ const SettingsPane = (props) => {
 
   const dispatch = useDispatch()
   const settings = useSelector((state) => state.settings)
+  const persist = settings['persistent-search']
 
-  const { resetData, updateSettings } = bindActionCreators(
+  const { resetData, updateSettings, updateSearch } = bindActionCreators(
     actionCreators,
     dispatch
   )
@@ -26,11 +27,14 @@ const SettingsPane = (props) => {
 
     switch (true) {
       case num === '' || parseInt(num) < 1:
-        return updateSettings({ 'history-length': 1 }, () => {})
+        return updateSettings({ ...settings, 'history-length': 1 })
       case parseInt(num) > 200:
-        return updateSettings({ 'history-length': 200 }, () => {})
+        return updateSettings({ ...settings, 'history-length': 200 })
       default:
-        updateSettings({ 'history-length': JSON.parse(num) }, () => {})
+        return updateSettings({
+          ...settings,
+          'history-length': JSON.parse(num),
+        })
     }
   }
 
@@ -56,7 +60,9 @@ const SettingsPane = (props) => {
         className='btnReset inputIcon'
         onClick={() => {
           props.toggleModel(props.settingsPopup)
-          resetData()
+          console.log(persist)
+          if (!persist) updateSearch('')
+
           setTimeout(() => {
             setConfirmReset(false)
           }, 400)
@@ -73,7 +79,17 @@ const SettingsPane = (props) => {
           onClick={(e) => clearStorage(e)}
         />
         <Row
+          title='Persist Unsearched Query'
+          type='persist-search'
+          persistSearch={persist}
+          setPersistSearch={(e) => {
+            updateSettings({ ...settings, 'persistent-search': !persist })
+            updateSearch('')
+          }}
+        />
+        <Row
           title='Maximum Search History Length'
+          type='history-length'
           historyLength={settings['history-length']}
           setLength={(e) => handleLengthChange(e)}
         />

@@ -1,35 +1,45 @@
 import { useRef, useState } from 'react'
 import { checkStr } from '../../utils/'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './style.css'
 import { actionCreators } from '../../state'
 
 const Header = () => {
-  const dispatch = useDispatch()
-  const { addToHistory } = bindActionCreators(actionCreators, dispatch)
-
   const inputEl = useRef()
   const [hasText, setHasText] = useState(false)
 
+  const handleInputFocus = (e) => {
+    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
+  }
+
+  const dispatch = useDispatch()
+  const search = useSelector((state) => state.data.persistent)
+  const persistentSearch = useSelector(
+    (state) => state.settings['persistent-search']
+  )
+
+  const { addToHistory, updateSearch } = bindActionCreators(
+    actionCreators,
+    dispatch
+  )
+
   const resetInput = () => {
     // whenever stop icon is pushed, reset ando focus on the input
+    updateSearch('')
     inputEl.current.value = ''
     inputEl.current.focus()
-    setHasText(false)
   }
 
   const submitOnEnter = (e) => {
-    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
+    updateSearch(inputEl.current.value)
+    handleInputFocus()
     if (e.keyCode === 13) {
-      checkStr(inputEl, (str) =>
+      checkStr(inputEl, (str) => {
         addToHistory({ url: str, date: new Date().toLocaleString() })
-      )
+        updateSearch('')
+      })
     }
-  }
-
-  const handleInputFocus = (e) => {
-    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
   }
 
   return (
@@ -38,8 +48,8 @@ const Header = () => {
         <input
           ref={inputEl}
           autoFocus
+          defaultValue={persistentSearch === true ? search : null}
           placeholder='Enter Your Query Here'
-          onClick={(e) => handleInputFocus(e)}
           onKeyUp={(e) => submitOnEnter(e)}
         />
         {hasText ? (
@@ -55,9 +65,10 @@ const Header = () => {
           className='btnReset inputIcon inputIconActive'
           id='submit-search'
           onClick={() =>
-            checkStr(inputEl, (str) =>
+            checkStr(inputEl, (str) => {
               addToHistory({ url: str, date: new Date().toLocaleString() })
-            )
+              updateSearch('')
+            })
           }
         >
           <i className='fas fa-search'></i>

@@ -8,13 +8,16 @@ export const initialState = () => {
   const oldHistory = JSON.parse(localStorage.getItem('ghPlagiarismHistory'))
   const oldScratchpad = localStorage.getItem('gh-scratchpad')
 
-  const newSettings = persistedSettings || {
+  const newSettings = {
     'history-length': 200,
+    'persistent-search': true,
+    ...persistedSettings,
   }
 
   const newObj = {
     history: oldHistory !== null ? oldHistory : [],
     scratchpad: oldScratchpad !== null ? oldScratchpad : '',
+    persistent: '',
     ...persistedData,
   }
 

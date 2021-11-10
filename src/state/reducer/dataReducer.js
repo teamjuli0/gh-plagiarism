@@ -1,6 +1,7 @@
 const initialState = {
   history: [],
   scratchpad: '',
+  persistent: '',
 }
 
 const reducer = (state = initialState, action) => {
@@ -37,6 +38,11 @@ const reducer = (state = initialState, action) => {
     case 'resetData':
       const resetData = { history: [], scratchpad: '' }
       return resetData
+
+    case 'updateSearch':
+      const updatedSearch = { ...state, persistent: action.payload }
+      return updatedSearch
+
     default:
       return state
   }
