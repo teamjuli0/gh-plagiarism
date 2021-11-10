@@ -35,9 +35,10 @@ const Header = () => {
     updateSearch(inputEl.current.value)
     handleInputFocus()
     if (e.keyCode === 13) {
-      checkStr(inputEl, (str) =>
+      checkStr(inputEl, (str) => {
         addToHistory({ url: str, date: new Date().toLocaleString() })
-      )
+        updateSearch('')
+      })
     }
   }
 
@@ -64,9 +65,10 @@ const Header = () => {
           className='btnReset inputIcon inputIconActive'
           id='submit-search'
           onClick={() =>
-            checkStr(inputEl, (str) =>
+            checkStr(inputEl, (str) => {
               addToHistory({ url: str, date: new Date().toLocaleString() })
-            )
+              updateSearch('')
+            })
           }
         >
           <i className='fas fa-search'></i>
