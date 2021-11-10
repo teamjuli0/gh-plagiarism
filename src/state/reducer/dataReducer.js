@@ -1,7 +1,7 @@
 const initialState = {
   history: [],
   scratchpad: '',
-  persistent: false,
+  persistent: '',
 }
 
 const reducer = (state = initialState, action) => {

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { checkStr } from '../../utils/'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -6,6 +6,13 @@ import './style.css'
 import { actionCreators } from '../../state'
 
 const Header = () => {
+  const inputEl = useRef()
+  const [hasText, setHasText] = useState(false)
+
+  const handleInputFocus = (e) => {
+    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
+  }
+
   const dispatch = useDispatch()
   const search = useSelector((state) => state.data.persistent)
   const persistentSearch = useSelector(
@@ -17,12 +24,6 @@ const Header = () => {
     dispatch
   )
 
-  // useEffect(() => {
-  //   if (persistentSearch === false) updateSearch('')
-  // })
-
-  const inputEl = useRef()
-
   const resetInput = () => {
     // whenever stop icon is pushed, reset ando focus on the input
     updateSearch('')
@@ -32,6 +33,7 @@ const Header = () => {
 
   const submitOnEnter = (e) => {
     updateSearch(inputEl.current.value)
+    handleInputFocus()
     if (e.keyCode === 13) {
       checkStr(inputEl, (str) =>
         addToHistory({ url: str, date: new Date().toLocaleString() })
@@ -49,7 +51,7 @@ const Header = () => {
           placeholder='Enter Your Query Here'
           onKeyUp={(e) => submitOnEnter(e)}
         />
-        {search !== '' ? (
+        {hasText ? (
           <button
             className='btnReset inputIcon inputIconActive'
             id='clear-search'

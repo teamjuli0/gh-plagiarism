@@ -10,14 +10,14 @@ export const initialState = () => {
 
   const newSettings = {
     'history-length': 200,
-    'persistent-search': false,
+    'persistent-search': true,
     ...persistedSettings,
   }
 
   const newObj = {
     history: oldHistory !== null ? oldHistory : [],
     scratchpad: oldScratchpad !== null ? oldScratchpad : '',
-    persistent: false,
+    persistent: '',
     ...persistedData,
   }
 
