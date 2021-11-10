@@ -1,35 +1,42 @@
-import { useRef, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { checkStr } from '../../utils/'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './style.css'
 import { actionCreators } from '../../state'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const { addToHistory } = bindActionCreators(actionCreators, dispatch)
+  const search = useSelector((state) => state.data.persistent)
+  const persistentSearch = useSelector(
+    (state) => state.settings['persistent-search']
+  )
+
+  const { addToHistory, updateSearch } = bindActionCreators(
+    actionCreators,
+    dispatch
+  )
+
+  // useEffect(() => {
+  //   if (persistentSearch === false) updateSearch('')
+  // })
 
   const inputEl = useRef()
-  const [hasText, setHasText] = useState(false)
 
   const resetInput = () => {
     // whenever stop icon is pushed, reset ando focus on the input
+    updateSearch('')
     inputEl.current.value = ''
     inputEl.current.focus()
-    setHasText(false)
   }
 
   const submitOnEnter = (e) => {
-    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
+    updateSearch(inputEl.current.value)
     if (e.keyCode === 13) {
       checkStr(inputEl, (str) =>
         addToHistory({ url: str, date: new Date().toLocaleString() })
       )
     }
-  }
-
-  const handleInputFocus = (e) => {
-    inputEl.current.value !== '' ? setHasText(true) : setHasText(false)
   }
 
   return (
@@ -38,11 +45,11 @@ const Header = () => {
         <input
           ref={inputEl}
           autoFocus
+          defaultValue={persistentSearch === true ? search : null}
           placeholder='Enter Your Query Here'
-          onClick={(e) => handleInputFocus(e)}
           onKeyUp={(e) => submitOnEnter(e)}
         />
-        {hasText ? (
+        {search !== '' ? (
           <button
             className='btnReset inputIcon inputIconActive'
             id='clear-search'

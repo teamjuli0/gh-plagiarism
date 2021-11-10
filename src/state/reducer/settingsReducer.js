@@ -1,4 +1,4 @@
-const initialState = { 'history-length': 200 }
+const initialState = { 'history-length': 200, 'persistent-search': false }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
