@@ -79,12 +79,6 @@ const SettingsPane = (props) => {
           onClick={(e) => clearStorage(e)}
         />
         <Row
-          title='Maximum Search History Length'
-          type='history-length'
-          historyLength={settings['history-length']}
-          setLength={(e) => handleLengthChange(e)}
-        />
-        <Row
           title='Persist Unsearched Query'
           type='persist-search'
           persistSearch={persist}
@@ -92,6 +86,12 @@ const SettingsPane = (props) => {
             updateSettings({ ...settings, 'persistent-search': !persist })
             updateSearch('')
           }}
+        />
+        <Row
+          title='Maximum Search History Length'
+          type='history-length'
+          historyLength={settings['history-length']}
+          setLength={(e) => handleLengthChange(e)}
         />
         {resetStorage ? (
           <ResetModal
